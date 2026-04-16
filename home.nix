@@ -6,29 +6,39 @@
 
   # User Apps
   home.packages = with pkgs; [
-    # other
+    # Apps
     brave
-
     discord
     deezer-desktop
     nautilus
 
-    # Code
-    gcc
+    # General tools
+    gtop
 
+    # Compiler
+    gcc
+    cargo
+    uv
+    python3
+
+    # Code tools
     neovim
     jetbrains.rust-rover
     godot_4
     vscode
     github-desktop
 
-    docker    
+    docker
+
+    rustfmt
 
     # Sway tools
     waybar
     mako
     swaylock
     nerd-fonts.jetbrains-mono
+    wofi
+    swaybg
   ];
 
   # Zsh & Oh My Zsh
@@ -41,7 +51,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "sudo" "docker" ];
-      theme = "robbyrussell"; # Simple and effective
+      theme = "robbyrussell";
     };
 
     shellAliases = {
