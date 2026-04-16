@@ -19,9 +19,9 @@
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        #specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/laptop/hardware-configuration.nix          
+          ./hosts/laptop/hardware-configuration.nix
           ./configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
