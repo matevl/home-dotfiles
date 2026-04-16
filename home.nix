@@ -6,14 +6,24 @@
 
   # User Apps
   home.packages = with pkgs; [
+    # other
     brave
-    deezer
-    github-desktop
+
+    discord
+    deezer-desktop
+    nautilus
+
     # Code
     gcc
+
     neovim
     jetbrains.rust-rover
     godot_4
+    vscode
+    github-desktop
+
+    docker    
+
     # Sway tools
     waybar
     mako
@@ -27,10 +37,16 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "sudo" "docker" ];
       theme = "robbyrussell"; # Simple and effective
+    };
+
+    shellAliases = {
+      update-nixos = "sudo nixos-rebuild switch --flake .#nixos";
+      clean-nixos = "sudo nix-collect-garbage -d";
     };
   };
 

@@ -1,6 +1,9 @@
 {
   description = "Mat's Clean NixOS 25.11 Config";
 
+  # To update
+  # sudo nixos-rebuild switch --flake .#nixos
+
   inputs = {
     # nixpkgs version (25.11)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
