@@ -12,13 +12,12 @@
 
   # Networking
   networking.hostName = "nixos";
-  networking.networkmanager.enable = true; # Use nmcli or GNOME settings for Wi-Fi
+  networking.networkmanager.enable = true;
 
-  # Time zone and Keyboard
+  # Time zone and Locale
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "fr_FR.UTF-8";
   console.keyMap = "fr";
-  # Configure X11 and Wayland keyboard layout
   services.xserver.xkb = {
     layout = "fr";
     variant = "";
@@ -27,44 +26,39 @@
   # Allow proprietary software
   nixpkgs.config.allowUnfree = true;
 
-  # --- Desktop Environments ---
-
-  # GNOME (for chill)
+  # Desktop Environments
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  # Sway (for work)
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
   };
 
-  # --- Services ---
-
-  # Enable GNOME Keyring (needed for passwords)
+  # Services
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
-
-  # Enable Polkit (required for Sway to handle permissions)
   security.polkit.enable = true;
 
-  # Define user account
+  # Enable Zsh at system level
+  programs.zsh.enable = true;
+
+  # User account
   users.users.mat = {
     isNormalUser = true;
     description = "mat";
+    shell = pkgs.zsh; # Zsh as default
     extraGroups = [ "networkmanager" "wheel" "video" ];
   };
 
-  # Core system packages
   environment.systemPackages = with pkgs; [
     git
     vim
     wget
     curl
-    networkmanagerapplet # Wi-Fi icon for Sway
+    networkmanagerapplet
   ];
 
-  # NixOS state version
   system.stateVersion = "25.11";
 }
