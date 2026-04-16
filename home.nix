@@ -45,7 +45,6 @@
     };
 
     shellAliases = {
-      update-nixos = "sudo nixos-rebuild switch --flake .#nixos";
       clean-nixos = "sudo nix-collect-garbage -d";
     };
   };

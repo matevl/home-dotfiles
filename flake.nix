@@ -2,7 +2,7 @@
   description = "Mat's Clean NixOS 25.11 Config";
 
   # To update
-  # sudo nixos-rebuild switch --flake .#nixos
+  # sudo nixos-rebuild switch --flake .#name
 
   inputs = {
     # nixpkgs version (25.11)
@@ -16,17 +16,20 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.mat = import ./home.nix;
-        }
-      ];
+    nixosConfigurations = {
+      laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        #specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/laptop/hardware-configuration.nix          
+          ./configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.mat = import ./home.nix;
+          }
+        ];
+      };
     };
   };
 }
