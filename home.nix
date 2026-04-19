@@ -8,7 +8,7 @@ in
 
   # User Apps
   home.packages = with pkgs; [
-    # Apps
+    # --- Apps ---
     brave
     discord
     deezer-desktop
@@ -16,25 +16,40 @@ in
 
     # General tools
     gtop
+    fastfetch
 
+    # --- Code tools ---
     # Compiler
+    # C
     gcc
-    cargo
-    uv
-    python3
 
-    # Code tools
+    # Rust
+    rustc
+    cargo
+    rustfmt
+
+    # Python
+    python3
+    uv
+    ruff
+
+    # JS/TS
+    nodejs
+
+    # IDEs/editors
     neovim
     jetbrains.rust-rover
     godot_4
     vscode
-    github-desktop
 
+    # Git tools
+    github-desktop
+    gitkraken
+
+    # Containers
     docker
 
-    rustfmt
-
-    # Sway tools
+    # --- Sway tools ---
     waybar
     mako
     swaylock
@@ -56,6 +71,10 @@ in
       theme = "robbyrussell";
     };
 
+    initContent = ''
+      fastfetch
+    '';
+
     shellAliases = {
       clean-nixos = "sudo nix-collect-garbage -d";
     };
@@ -66,7 +85,7 @@ in
     enable = true;
     settings = {
       confirm_os_window_close = 0;
-      background_opacity = "0.9";
+      background_opacity = "0.8";
     };
   };
 
@@ -74,7 +93,7 @@ in
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    userSettings = {
+    profiles.default.userSettings = {
       "editor.fontSize" = 14;
       "terminal.integrated.defaultProfile.linux" = "zsh";
       "telemetry.enableTelemetry" = false;
@@ -93,7 +112,10 @@ in
       ];
       defaultWorkspace = "workspace number 1";
       keybindings = import ./sway/keybindings.nix { inherit config pkgs; };
-      input = { "type:keyboard" = { xkb_layout = "fr"; }; };
+      input = { 
+        "type:keyboard" = { xkb_layout = "fr"; };
+        "type:touchpad" = { click_method = "button_areas"; };
+      };
       gaps = {
         inner = 5;
         outer = 3;
@@ -119,6 +141,9 @@ in
     "org/gnome/desktop/background" = {
       picture-uri = "file:///${wallpaper}";
       picture-uri-dark = "file:///${wallpaper}";
+    };
+    "org/gnome/desktop/peripherals/touchpad" = {
+      click-method = "areas";
     };
   };
 
