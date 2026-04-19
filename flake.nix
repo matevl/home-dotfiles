@@ -7,6 +7,7 @@
   inputs = {
     # nixpkgs version (25.11)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home Manager for 25.11
     home-manager = {
@@ -15,7 +16,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs: {
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -26,6 +27,12 @@
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {
+              pkgs-unstable = import nixpkgs-unstable {
+                system = "x86_64-linux";
+                config.allowUnfree = true;
+              };
+            };
             home-manager.users.mat = import ./home.nix;
           }
         ];

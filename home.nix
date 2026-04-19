@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 let 
   wallpaper = "/home/mat/home/images/mainwallpaper.png";
 in
@@ -39,7 +39,7 @@ in
     # IDEs/editors
     neovim
     jetbrains.rust-rover
-    godot_4
+    pkgs-unstable.godot_4
     vscode
 
     # Git tools
