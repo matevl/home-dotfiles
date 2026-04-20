@@ -13,6 +13,7 @@ in
     discord
     deezer-desktop
     nautilus
+    vlc
 
     # General tools
     gtop
