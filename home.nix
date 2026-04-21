@@ -30,6 +30,8 @@
     # Compiler
     # C
     gcc
+    gnumake
+    cmake
 
     # Rust
     rustc
