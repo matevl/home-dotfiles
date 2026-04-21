@@ -8,7 +8,16 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Nix settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   # Networking
   networking.hostName = "nixos";
@@ -50,6 +59,20 @@
     wrapperFeatures.gtk = true;
   };
 
+  # -- RAM / OOM Optimizations --
+  services.earlyoom = {
+    enable = true;
+    enableNotifications = true;
+    freeMemThreshold = 5;
+    freeMemKillThreshold = 1;
+  };
+
+  zramSwap = {
+    enable = true;
+    priority = 1000;
+    algorithm = "zstd";
+  };
+
   # Services
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
@@ -63,7 +86,11 @@
     isNormalUser = true;
     description = "mat";
     shell = pkgs.zsh; # Zsh as default
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+    ];
   };
 
   environment.systemPackages = with pkgs; [

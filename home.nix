@@ -1,5 +1,10 @@
-{ config, pkgs, pkgs-unstable, ... }:
-let 
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
+let
   wallpaper = "/home/mat/home/images/mainwallpaper.png";
 in
 {
@@ -37,6 +42,10 @@ in
     # JS/TS
     nodejs
 
+    # NIX
+    nix
+    nixfmt
+
     # IDEs/editors
     neovim
     jetbrains.rust-rover
@@ -65,10 +74,14 @@ in
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    
+
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" "docker" ];
+      plugins = [
+        "git"
+        "sudo"
+        "docker"
+      ];
     };
 
     initContent = ''
@@ -120,13 +133,20 @@ in
       terminal = "kitty";
       bars = [ { command = "waybar"; } ];
       startup = [
-        { command = "swaybg -i ${wallpaper} -m fill"; always = true; }
+        {
+          command = "swaybg -i ${wallpaper} -m fill";
+          always = true;
+        }
       ];
       defaultWorkspace = "workspace number 1";
       keybindings = import ./sway/keybindings.nix { inherit config pkgs; };
-      input = { 
-        "type:keyboard" = { xkb_layout = "fr"; };
-        "type:touchpad" = { click_method = "button_areas"; };
+      input = {
+        "type:keyboard" = {
+          xkb_layout = "fr";
+        };
+        "type:touchpad" = {
+          click_method = "button_areas";
+        };
       };
       gaps = {
         inner = 5;
@@ -142,7 +162,10 @@ in
   # Theme consistency (GNOME files/Nautilus will look good)
   gtk = {
     enable = true;
-    theme = { name = "adw-gtk3-dark"; package = pkgs.adw-gtk3; };
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
   };
 
   # Force dark mode for GNOME/GTK apps
