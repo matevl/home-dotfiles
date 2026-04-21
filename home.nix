@@ -8,6 +8,7 @@
   imports = [
     ./sway
     ./gnome
+    ./nvim
   ];
 
   home.username = "mat";
@@ -51,7 +52,6 @@
     nixfmt
 
     # IDEs/editors
-    neovim
     jetbrains.rust-rover
     pkgs-unstable.godot_4
     vscode
