@@ -4,10 +4,12 @@
   pkgs-unstable,
   ...
 }:
-let
-  wallpaper = "/home/mat/home/images/mainwallpaper.png";
-in
 {
+  imports = [
+    ./sway
+    ./gnome
+  ];
+
   home.username = "mat";
   home.homeDirectory = "/home/mat";
 
@@ -122,63 +124,6 @@ in
       "editor.fontSize" = 14;
       "terminal.integrated.defaultProfile.linux" = "zsh";
       "telemetry.enableTelemetry" = false;
-    };
-  };
-
-  # Sway
-  wayland.windowManager.sway = {
-    enable = true;
-    config = {
-      modifier = "Mod4";
-      terminal = "kitty";
-      bars = [ { command = "waybar"; } ];
-      startup = [
-        {
-          command = "swaybg -i ${wallpaper} -m fill";
-          always = true;
-        }
-      ];
-      defaultWorkspace = "workspace number 1";
-      keybindings = import ./sway/keybindings.nix { inherit config pkgs; };
-      input = {
-        "type:keyboard" = {
-          xkb_layout = "fr";
-        };
-        "type:touchpad" = {
-          click_method = "button_areas";
-        };
-      };
-      gaps = {
-        inner = 5;
-        outer = 3;
-      };
-      window = {
-        border = 2;
-        titlebar = false;
-      };
-    };
-  };
-
-  # Theme consistency (GNOME files/Nautilus will look good)
-  gtk = {
-    enable = true;
-    theme = {
-      name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
-    };
-  };
-
-  # Force dark mode for GNOME/GTK apps
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-    "org/gnome/desktop/background" = {
-      picture-uri = "file:///${wallpaper}";
-      picture-uri-dark = "file:///${wallpaper}";
-    };
-    "org/gnome/desktop/peripherals/touchpad" = {
-      click-method = "areas";
     };
   };
 
