@@ -8,7 +8,7 @@
   imports = [
     ./sway
     ./gnome
-    ./nvim
+    ./helix
   ];
 
   home.username = "mat";
