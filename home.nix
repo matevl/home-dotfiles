@@ -29,7 +29,7 @@ in
     vlc
 
     # General tools
-    gtop
+    btop
     fastfetch
 
     # --- Code tools ---
@@ -138,6 +138,7 @@ in
     enable = true;
     package = pkgs.vscode;
     profiles.default.userSettings = {
+      "window.titleBarStyle" = "native";
       "editor.fontSize" = 14;
       "terminal.integrated.defaultProfile.linux" = "zsh";
       "telemetry.telemetryLevel" = "off";

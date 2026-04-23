@@ -12,6 +12,12 @@ input {
 
 layout {
     gaps 16
+    struts {
+        left 4 
+        right 4
+        top 4
+        bottom 4
+    }
     center-focused-column "never"
 
     preset-column-widths {
@@ -26,8 +32,12 @@ layout {
     border {
         width 2
         active-color "#7cbfaf"
-        inactive-color "#505050"
     }
+}
+
+window-rule {
+    match app-id="kitty"
+    draw-border-with-background false
 }
 
 spawn-at-startup "dms" "run"
