@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  wallpaper = "/home/mat/home/images/mainwallpaper.png";
+  vars = import ../variables.nix;
+  wallpaper = vars.wallpaper;
 in
 {
   # Theme consistency (GNOME files/Nautilus will look good)

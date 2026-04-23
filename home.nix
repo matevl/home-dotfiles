@@ -4,6 +4,9 @@
   pkgs-unstable,
   ...
 }:
+let
+  vars = import ./variables.nix;
+in
 {
   imports = [
     ./sway
@@ -11,8 +14,8 @@
     ./helix
   ];
 
-  home.username = "mat";
-  home.homeDirectory = "/home/mat";
+  home.username = vars.username;
+  home.homeDirectory = vars.homeDirectory;
 
   # User Apps
   home.packages = with pkgs; [

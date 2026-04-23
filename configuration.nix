@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  vars = import ./variables.nix;
+in
 {
   imports = [ ];
 
@@ -82,9 +85,9 @@
   programs.zsh.enable = true;
 
   # User account
-  users.users.mat = {
+  users.users.${vars.username} = {
     isNormalUser = true;
-    description = "mat";
+    description = vars.username;
     shell = pkgs.zsh; # Zsh as default
     extraGroups = [
       "networkmanager"

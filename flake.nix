@@ -25,6 +25,7 @@
       ...
     }@inputs:
     let
+      vars = import ./variables.nix;
       mkHost =
         hostname:
         nixpkgs.lib.nixosSystem {
@@ -43,7 +44,7 @@
                   config.allowUnfree = true;
                 };
               };
-              home-manager.users.mat = import ./home.nix;
+              home-manager.users.${vars.username} = import ./home.nix;
             }
           ];
         };
