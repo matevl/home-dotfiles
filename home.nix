@@ -71,7 +71,6 @@ in
     # --- Windows managers tools ---
     swaylock
     swayidle
-    swaybg
     nerd-fonts.jetbrains-mono
   ];
 
