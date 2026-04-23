@@ -5,6 +5,7 @@ in
 {
   inherit username homeDirectory;
   wallpaper = "${homeDirectory}/home/wallpapers/mainwallpaper.png";
+  lockWallpaper = "${homeDirectory}/home/wallpapers/lockwallpaper.png";
 
   hostName = "nixos";
   timeZone = "Europe/Paris";

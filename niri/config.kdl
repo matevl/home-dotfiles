@@ -42,7 +42,7 @@ window-rule {
 
 spawn-at-startup "dms" "run"
 spawn-at-startup "dms" "ipc" "wallpaper" "set" "~/home/wallpapers/mainwallpaper.png"
-spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f -c 000000" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -f -c 000000"
+spawn-at-startup "swayidle" "-w" "timeout" "300" "hyprlock" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "hyprlock"
 
 binds {
     Mod+Space { toggle-overview; }
@@ -51,7 +51,7 @@ binds {
     Mod+D { spawn "dms" "ipc" "launcher" "toggle"; }
     Mod+Shift+Q { close-window; }
     Mod+H { show-hotkey-overlay; }
-    Ctrl+Alt+L { spawn "swaylock" "-f" "-c" "000000"; }
+    Ctrl+Alt+L { spawn "hyprlock"; }
     
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
