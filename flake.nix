@@ -14,6 +14,8 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dms.url = "github:AvengeMedia/DankMaterialShell";
   };
 
   outputs =
@@ -34,11 +36,13 @@
           modules = [
             (./hosts + "/${hostname}/hardware-configuration.nix")
             ./configuration.nix
+            inputs.dms.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
+                inherit inputs;
                 pkgs-unstable = import nixpkgs-unstable {
                   system = "x86_64-linux";
                   config.allowUnfree = true;

@@ -42,6 +42,7 @@ in
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  programs.niri.enable = true;
 
   # Disable unnecessary default GNOME applications
   environment.gnome.excludePackages = with pkgs; [
@@ -60,6 +61,11 @@ in
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
+  };
+
+  programs.dank-material-shell = {
+    enable = true;
+    enableSystemMonitoring = false;
   };
 
   # -- RAM / OOM Optimizations --

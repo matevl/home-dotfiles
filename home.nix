@@ -2,6 +2,7 @@
   config,
   pkgs,
   pkgs-unstable,
+  inputs,
   ...
 }:
 let
@@ -12,6 +13,8 @@ in
     ./sway
     ./gnome
     ./helix
+    ./niri
+    inputs.dms.homeModules.default
   ];
 
   home.username = vars.username;
@@ -66,14 +69,24 @@ in
     # Containers
     docker
 
-    # --- Sway tools ---
-    waybar
+    # --- Windows managers tools ---
     mako
     swaylock
     nerd-fonts.jetbrains-mono
     wofi
-    swaybg
   ];
+
+  programs.dank-material-shell = {
+    enable = true;
+
+    enableSystemMonitoring = false;
+
+    settings = {
+      wallpaper = vars.wallpaper;
+      background.type = "image";
+      background.mode = "fill";
+    };
+  };
 
   # Zsh & Oh My Zsh
   programs.zsh = {
@@ -134,5 +147,5 @@ in
   };
 
   programs.home-manager.enable = true;
-  home.stateVersion = "25.11";
+  home.stateVersion = vars.stateVersion;
 }

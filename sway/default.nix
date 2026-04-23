@@ -8,10 +8,11 @@ in
   # Sway
   wayland.windowManager.sway = {
     enable = true;
+    systemd.enable = true;
     config = {
       modifier = "Mod4";
       terminal = "kitty";
-      bars = [ { command = "waybar"; } ];
+      bars = [ ];
       startup = [
         {
           command = "swaybg -i ${wallpaper} -m fill";
