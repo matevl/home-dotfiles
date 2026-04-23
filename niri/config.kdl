@@ -1,0 +1,87 @@
+input {
+    keyboard {
+        xkb {
+            layout "fr"
+        }
+    }
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+layout {
+    gaps 16
+    struts {
+        left 4 
+        right 4
+        top 4
+        bottom 4
+    }
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        off
+    }
+    border {
+        width 2
+        active-color "#7cbfaf"
+    }
+}
+
+window-rule {
+    match app-id="kitty"
+    draw-border-with-background false
+}
+
+spawn-at-startup "dms" "run"
+spawn-at-startup "dms" "ipc" "wallpaper" "set" "~/home/wallpapers/mainwallpaper.png"
+spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f -c 000000" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -f -c 000000"
+
+binds {
+    Mod+Space { toggle-overview; }
+    Mod+Return { spawn "kitty"; }
+    Mod+Shift+E { quit; }
+    Mod+D { spawn "dms" "ipc" "launcher" "toggle"; }
+    Mod+Shift+Q { close-window; }
+    Mod+H { show-hotkey-overlay; }
+    Ctrl+Alt+L { spawn "swaylock" "-f" "-c" "000000"; }
+    
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
+
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Down  { move-window-down; }
+    Mod+Shift+Up    { move-window-up; }
+    Mod+Shift+Right { move-column-right; }
+
+    Mod+ampersand { focus-workspace 1; }
+    Mod+eacute { focus-workspace 2; }
+    Mod+quotedbl { focus-workspace 3; }
+    Mod+apostrophe { focus-workspace 4; }
+    Mod+parenleft { focus-workspace 5; }
+    Mod+minus { focus-workspace 6; }
+    Mod+egrave { focus-workspace 7; }
+    Mod+underscore { focus-workspace 8; }
+    Mod+ccedilla { focus-workspace 9; }
+    Mod+agrave { focus-workspace 10; }
+
+    Mod+Shift+ampersand { move-column-to-workspace 1; }
+    Mod+Shift+eacute { move-column-to-workspace 2; }
+    Mod+Shift+quotedbl { move-column-to-workspace 3; }
+    Mod+Shift+apostrophe { move-column-to-workspace 4; }
+    Mod+Shift+parenleft { move-column-to-workspace 5; }
+    Mod+Shift+minus { move-column-to-workspace 6; }
+    Mod+Shift+egrave { move-column-to-workspace 7; }
+    Mod+Shift+underscore { move-column-to-workspace 8; }
+    Mod+Shift+ccedilla { move-column-to-workspace 9; }
+    Mod+Shift+agrave { move-column-to-workspace 10; }
+}

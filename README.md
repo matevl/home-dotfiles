@@ -5,7 +5,7 @@ This repository contains my personal NixOS configuration, managed with **Flakes*
 ## 🖥️ Desktop Environments
 
 I use a dual-setup strategy to separate mindsets:
-* **Sway (Wayland):** My primary environment for **Work**. Minimal, fast, and keyboard-driven.
+* **Niri (Wayland):** My primary environment for **Work**. A scrollable-tiling window manager, fast and keyboard-driven, integrated with DankMaterialShell.
 * **GNOME:** My environment for **Chill**. Stable and distraction-free.
 
 ## 🛠️ Status

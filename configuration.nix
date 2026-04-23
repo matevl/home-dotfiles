@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  vars = import ./variables.nix;
+in
 {
   imports = [ ];
 
@@ -8,18 +11,27 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Nix settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   # Networking
-  networking.hostName = "nixos";
+  networking.hostName = vars.hostName;
   networking.networkmanager.enable = true;
 
   # Time zone and Locale
-  time.timeZone = "Europe/Paris";
-  i18n.defaultLocale = "fr_FR.UTF-8";
-  console.keyMap = "fr";
+  time.timeZone = vars.timeZone;
+  i18n.defaultLocale = vars.defaultLocale;
+  console.keyMap = vars.keyboardLayout;
   services.xserver.xkb = {
-    layout = "fr";
+    layout = vars.keyboardLayout;
     variant = "";
   };
 
@@ -28,12 +40,41 @@
 
   # Desktop Environments
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+  programs.niri.enable = true;
 
-  programs.sway = {
+  # Disable unnecessary default GNOME applications
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-tour
+    gnome-console
+    epiphany # Web browser
+    geary # Mail client
+    gnome-music
+    gnome-calendar
+    gnome-contacts
+    gnome-maps
+    gnome-weather
+    totem # Video player
+  ];
+
+  programs.dank-material-shell = {
     enable = true;
-    wrapperFeatures.gtk = true;
+    enableSystemMonitoring = false;
+  };
+
+  # -- RAM / OOM Optimizations --
+  services.earlyoom = {
+    enable = true;
+    enableNotifications = true;
+    freeMemThreshold = 5;
+    freeMemKillThreshold = 1;
+  };
+
+  zramSwap = {
+    enable = true;
+    priority = 1000;
+    algorithm = "zstd";
   };
 
   # Services
@@ -45,11 +86,15 @@
   programs.zsh.enable = true;
 
   # User account
-  users.users.mat = {
+  users.users.${vars.username} = {
     isNormalUser = true;
-    description = "mat";
+    description = vars.username;
     shell = pkgs.zsh; # Zsh as default
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -59,7 +104,13 @@
     wget
     curl
     networkmanagerapplet
+    steam-run
   ];
 
-  system.stateVersion = "25.11";
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib
+  ];
+
+  system.stateVersion = vars.stateVersion;
 }

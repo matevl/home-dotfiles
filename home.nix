@@ -1,35 +1,90 @@
-{ config, pkgs, ... }:
-
 {
-  home.username = "mat";
-  home.homeDirectory = "/home/mat";
+  config,
+  pkgs,
+  pkgs-unstable,
+  inputs,
+  ...
+}:
+let
+  vars = import ./variables.nix;
+in
+{
+  imports = [
+    ./gnome
+    ./helix
+    ./niri
+    inputs.dms.homeModules.default
+  ];
+
+  home.username = vars.username;
+  home.homeDirectory = vars.homeDirectory;
 
   # User Apps
   home.packages = with pkgs; [
-    # other
+    # --- Apps ---
     brave
-
     discord
     deezer-desktop
     nautilus
+    vlc
 
-    # Code
+    # General tools
+    btop
+    fastfetch
+
+    # --- Code tools ---
+    # Compiler
+    # C
     gcc
+    gnumake
+    cmake
 
-    neovim
+    # Rust
+    rustc
+    cargo
+    rustfmt
+
+    # Python
+    python3
+    uv
+    ruff
+
+    # JS/TS
+    nodejs
+
+    # NIX
+    nix
+    nixfmt
+
+    # IDEs/editors
     jetbrains.rust-rover
-    godot_4
+    pkgs-unstable.godot_4
     vscode
+
+    # Git tools
     github-desktop
+    gitkraken
 
-    docker    
+    # Containers
+    docker
 
-    # Sway tools
-    waybar
-    mako
+    # --- Windows managers tools ---
     swaylock
+    swayidle
     nerd-fonts.jetbrains-mono
   ];
+
+  programs.dank-material-shell = {
+    enable = true;
+
+    enableSystemMonitoring = false;
+
+    settings = {
+      wallpaper = vars.wallpaper;
+      background.type = "image";
+      background.mode = "fill";
+    };
+  };
 
   # Zsh & Oh My Zsh
   programs.zsh = {
@@ -37,15 +92,35 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    
+
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" "docker" ];
-      theme = "robbyrussell"; # Simple and effective
+      plugins = [
+        "git"
+        "sudo"
+        "docker"
+      ];
     };
+
+    initContent = ''
+      setopt HIST_IGNORE_SPACE
+      fastfetch
+    '';
 
     shellAliases = {
       clean-nixos = "sudo nix-collect-garbage -d";
+    };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = true;
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
+      };
     };
   };
 
@@ -54,7 +129,7 @@
     enable = true;
     settings = {
       confirm_os_window_close = 0;
-      background_opacity = "0.9";
+      background_opacity = "0.8";
     };
   };
 
@@ -62,30 +137,18 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    userSettings = {
+    profiles.default.userSettings = {
+      "window.titleBarStyle" = "native";
       "editor.fontSize" = 14;
       "terminal.integrated.defaultProfile.linux" = "zsh";
-      "telemetry.enableTelemetry" = false;
+      "telemetry.telemetryLevel" = "off";
     };
   };
 
-  # Sway
-  wayland.windowManager.sway = {
-    enable = true;
-    config = {
-      modifier = "Mod4";
-      terminal = "kitty";
-      bars = [ { command = "waybar"; } ];
-      input = { "type:keyboard" = { xkb_layout = "fr"; }; };
-    };
-  };
-
-  # Theme consistency (GNOME files/Nautilus will look good)
-  gtk = {
-    enable = true;
-    theme = { name = "adw-gtk3-dark"; package = pkgs.adw-gtk3; };
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
   };
 
   programs.home-manager.enable = true;
-  home.stateVersion = "25.11";
+  home.stateVersion = vars.stateVersion;
 }
