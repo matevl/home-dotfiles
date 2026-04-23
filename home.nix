@@ -10,7 +10,6 @@ let
 in
 {
   imports = [
-    ./sway
     ./gnome
     ./helix
     ./niri
@@ -70,10 +69,10 @@ in
     docker
 
     # --- Windows managers tools ---
-    mako
     swaylock
+    swayidle
+    swaybg
     nerd-fonts.jetbrains-mono
-    wofi
   ];
 
   programs.dank-material-shell = {
@@ -142,8 +141,12 @@ in
     profiles.default.userSettings = {
       "editor.fontSize" = 14;
       "terminal.integrated.defaultProfile.linux" = "zsh";
-      "telemetry.enableTelemetry" = false;
+      "telemetry.telemetryLevel" = "off";
     };
+  };
+
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
   };
 
   programs.home-manager.enable = true;

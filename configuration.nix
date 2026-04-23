@@ -58,11 +58,6 @@ in
     totem # Video player
   ];
 
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
-
   programs.dank-material-shell = {
     enable = true;
     enableSystemMonitoring = false;
