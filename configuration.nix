@@ -23,15 +23,15 @@ in
   };
 
   # Networking
-  networking.hostName = "nixos";
+  networking.hostName = vars.hostName;
   networking.networkmanager.enable = true;
 
   # Time zone and Locale
-  time.timeZone = "Europe/Paris";
-  i18n.defaultLocale = "en_US.UTF-8";
-  console.keyMap = "fr";
+  time.timeZone = vars.timeZone;
+  i18n.defaultLocale = vars.defaultLocale;
+  console.keyMap = vars.keyboardLayout;
   services.xserver.xkb = {
-    layout = "fr";
+    layout = vars.keyboardLayout;
     variant = "";
   };
 
@@ -111,5 +111,5 @@ in
     stdenv.cc.cc.lib
   ];
 
-  system.stateVersion = "25.11";
+  system.stateVersion = vars.stateVersion;
 }
