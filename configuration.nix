@@ -26,6 +26,8 @@ in
   networking.hostName = vars.hostName;
   networking.networkmanager.enable = true;
 
+  programs.ssh.package = pkgs.openssh_gssapi;
+
   # Time zone and Locale
   time.timeZone = vars.timeZone;
   i18n.defaultLocale = vars.defaultLocale;

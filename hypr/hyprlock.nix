@@ -47,7 +47,7 @@ in
           color = "rgb(200, 200, 200)";
           font_size = 16;
           font_family = "JetBrainsMono Nerd Font ExtraBold";
-          position = "-45, 30"; 
+          position = "-45, 30";
           halign = "right";
           valign = "bottom";
         }
