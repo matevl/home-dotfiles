@@ -7,6 +7,17 @@
 }:
 let
   vars = import ./variables.nix;
+  wrapElectron =
+    pkg:
+    pkgs.symlinkJoin {
+      name = "${pkg.pname or pkg.name}-wrapped";
+      paths = [ pkg ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/${pkg.pname or pkg.name} \
+          --append-flags "--disable-features=WaylandPerSurfaceScale"
+      '';
+    };
 in
 {
   imports = [
@@ -25,9 +36,8 @@ in
   # User Apps
   home.packages = with pkgs; [
     # --- Apps ---
-    brave
-    vesktop
-    deezer-desktop
+    (wrapElectron vesktop)
+    (wrapElectron deezer-desktop)
     nautilus
     vlc
 
@@ -63,12 +73,12 @@ in
     # IDEs/editors
     jetbrains.rust-rover
     pkgs-unstable.godot_4
-    vscode
+    (vscode.override { commandLineArgs = "--disable-features=WaylandPerSurfaceScale"; })
     antigravity
 
     # Git tools
-    github-desktop
-    gitkraken
+    (wrapElectron github-desktop)
+    (wrapElectron gitkraken)
 
     # Containers
     docker
@@ -78,9 +88,13 @@ in
     nerd-fonts.jetbrains-mono
   ];
 
-  services.ssh-agent.enable = true;
-
   # DMS
+  programs.chromium = {
+    enable = true;
+    package = pkgs.brave;
+    commandLineArgs = [ "--disable-features=WaylandPerSurfaceScale" ];
+  };
+
   programs.dank-material-shell = {
     enable = true;
 
@@ -105,7 +119,9 @@ in
   # VS Code
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode;
+    package = pkgs.vscode.override {
+      commandLineArgs = "--disable-features=WaylandPerSurfaceScale";
+    };
     profiles.default.userSettings = {
       "window.titleBarStyle" = "native";
       "editor.fontSize" = 14;

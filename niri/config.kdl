@@ -11,12 +11,12 @@ input {
 }
 
 layout {
-    gaps 16
+    gaps 10
     struts {
-        left 4 
-        right 4
-        top 4
-        bottom 4
+        left 2 
+        right 2
+        top 2
+        bottom 2
     }
     center-focused-column "never"
 
@@ -28,10 +28,6 @@ layout {
     default-column-width { proportion 0.5; }
     focus-ring {
         off
-    }
-    border {
-        width 2
-        active-color "#7cbfaf"
     }
 }
 
