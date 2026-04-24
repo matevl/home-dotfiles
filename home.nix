@@ -32,6 +32,7 @@ in
     # General tools
     btop
     fastfetch
+    krb5
 
     # --- Code tools ---
     # Compiler
@@ -73,6 +74,8 @@ in
     swayidle
     nerd-fonts.jetbrains-mono
   ];
+
+  services.ssh-agent.enable = true;
 
   programs.dank-material-shell = {
     enable = true;
