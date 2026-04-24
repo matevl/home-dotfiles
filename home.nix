@@ -12,6 +12,7 @@ in
   imports = [
     ./gnome
     ./helix
+    ./hypr/hyprlock.nix
     ./niri
     inputs.dms.homeModules.default
   ];
@@ -150,36 +151,4 @@ in
 
   programs.home-manager.enable = true;
   home.stateVersion = vars.stateVersion;
-
-  programs.hyprlock = {
-    enable = true;
-    settings = {
-      background = [
-        {
-          monitor = "";
-          path = vars.lockWallpaper;
-          blur_passes = 0;
-        }
-      ];
-      input-field = [
-        {
-          monitor = "";
-          size = "200, 50";
-          outline_thickness = 3;
-          dots_size = 0.33;
-          dots_spacing = 0.15;
-          dots_center = true;
-          outer_color = "rgb(15, 15, 15)";
-          inner_color = "rgb(200, 200, 200)";
-          font_color = "rgb(10, 10, 10)";
-          fade_on_empty = true;
-          placeholder_text = "<i>Input Password...</i>";
-          hide_input = false;
-          position = "0, -20";
-          halign = "center";
-          valign = "center";
-        }
-      ];
-    };
-  };
 }
