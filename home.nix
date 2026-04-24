@@ -14,9 +14,11 @@ in
     ./helix
     ./hypr/hyprlock.nix
     ./niri
+    ./zsh
     inputs.dms.homeModules.default
   ];
 
+  # User
   home.username = vars.username;
   home.homeDirectory = vars.homeDirectory;
 
@@ -62,6 +64,7 @@ in
     jetbrains.rust-rover
     pkgs-unstable.godot_4
     vscode
+    antigravity
 
     # Git tools
     github-desktop
@@ -77,6 +80,7 @@ in
 
   services.ssh-agent.enable = true;
 
+  # DMS
   programs.dank-material-shell = {
     enable = true;
 
@@ -86,44 +90,6 @@ in
       wallpaper = vars.wallpaper;
       background.type = "image";
       background.mode = "fill";
-    };
-  };
-
-  # Zsh & Oh My Zsh
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "git"
-        "sudo"
-        "docker"
-      ];
-    };
-
-    initContent = ''
-      setopt HIST_IGNORE_SPACE
-      fastfetch
-    '';
-
-    shellAliases = {
-      clean-nixos = "sudo nix-collect-garbage -d";
-    };
-  };
-
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      add_newline = true;
-      character = {
-        success_symbol = "[➜](bold green)";
-        error_symbol = "[➜](bold red)";
-      };
     };
   };
 
