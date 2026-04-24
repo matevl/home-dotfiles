@@ -28,14 +28,6 @@ in
 
   programs.ssh.package = pkgs.openssh_gssapi;
 
-  security.krb5 = {
-    enable = true;
-    settings.libdefaults = {
-      dns_canonicalize_hostname = false;
-      rdns = false;
-    };
-  };
-
   # Time zone and Locale
   time.timeZone = vars.timeZone;
   i18n.defaultLocale = vars.defaultLocale;

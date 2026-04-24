@@ -22,6 +22,7 @@
     '';
 
     shellAliases = {
+      claer = "clear";
       clean-nixos = "sudo nix-collect-garbage -d";
     };
   };
