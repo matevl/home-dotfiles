@@ -41,10 +41,18 @@ in
     nautilus
     vlc
 
-    # General tools
+    # --- General tools ---
+    # Monitor tools
     btop
+    resources
+
+    # Info tools
     fastfetch
+    eza
+    bat
+
     krb5
+    wl-clipboard
 
     # --- Code tools ---
     # Compiler
@@ -87,6 +95,11 @@ in
     swayidle
     nerd-fonts.jetbrains-mono
   ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   # DMS
   programs.chromium = {
