@@ -86,7 +86,6 @@ in
 
     # Git tools
     (wrapElectron github-desktop)
-    (wrapElectron gitkraken)
 
     # Containers
     docker
