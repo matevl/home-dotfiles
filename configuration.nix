@@ -96,13 +96,13 @@ in
       "networkmanager"
       "wheel"
       "video"
+      "docker"
     ];
   };
 
   environment.systemPackages = with pkgs; [
     git
     tree
-    vim
     wget
     curl
     networkmanagerapplet
@@ -113,6 +113,9 @@ in
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc.lib
   ];
+
+  virtualisation.docker.enable = true;
+  virtualisation.docker.autoPrune.enable = true;
 
   system.stateVersion = vars.stateVersion;
 }
