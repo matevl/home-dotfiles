@@ -15,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dms.url = "github:AvengeMedia/DankMaterialShell";
+    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
   };
 
   outputs =
