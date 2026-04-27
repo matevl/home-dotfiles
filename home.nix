@@ -79,9 +79,12 @@ in
 
     # IDEs/editors
     jetbrains.rust-rover
-    pkgs-unstable.godot_4
     (vscode.override { commandLineArgs = "--disable-features=WaylandPerSurfaceScale"; })
     pkgs-unstable.antigravity
+
+    # Game engines
+    pkgs-unstable.godot_4
+    pkgs-unstable.gdtoolkit_4
 
     # Git tools
     (wrapElectron github-desktop)
