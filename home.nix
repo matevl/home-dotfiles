@@ -46,13 +46,11 @@ in
     btop
     resources
 
-    # Info tools
+    # Shell tools
     fastfetch
     eza
     bat
-
-    krb5
-    wl-clipboard
+    screen
 
     # --- Code tools ---
     # Compiler
@@ -65,6 +63,7 @@ in
     rustc
     cargo
     rustfmt
+    clippy
 
     # Python
     python3
@@ -93,6 +92,7 @@ in
     # --- Windows managers tools ---
     swayidle
     nerd-fonts.jetbrains-mono
+    wl-clipboard
   ];
 
   programs.direnv = {
