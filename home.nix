@@ -24,6 +24,7 @@ in
     ./gnome
     ./helix
     ./hypr/hyprlock.nix
+    ./hypr/hypridle.nix
     ./niri
     ./zsh
     inputs.dms.homeModules.default
@@ -93,7 +94,6 @@ in
     docker
 
     # --- Windows managers tools ---
-    swayidle
     nerd-fonts.jetbrains-mono
     wl-clipboard
   ];
