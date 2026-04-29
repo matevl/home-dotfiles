@@ -7,7 +7,7 @@
       general = {
         lock_cmd = "pidof hyprlock || hyprlock"; # Limit hyprlock instances.
         before_sleep_cmd = "loginctl lock-session"; # Lock before suspend.
-        after_sleep_cmd = "hyprctl msg dispatch dpms on"; # Don't require 2 keypresses to wake.
+        after_sleep_cmd = "niri msg action power-on-monitors"; # Don't require 2 keypresses to wake.
       };
 
       listener = [

@@ -117,9 +117,9 @@ in
   virtualisation.docker.enable = true;
   virtualisation.docker.autoPrune.enable = true;
 
-  services.logind = {
-    lidSwitch = "suspend";
-    lidSwitchExternalPower = "suspend";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
   };
 
   system.stateVersion = vars.stateVersion;

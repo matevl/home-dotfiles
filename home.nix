@@ -47,11 +47,13 @@ in
     btop
     resources
 
-    # Shell tools
+    # --- Shell tools ---
     fastfetch
     eza
     bat
     screen
+    mutagen
+    docker
 
     # --- Code tools ---
     # Compiler
@@ -90,9 +92,6 @@ in
     # Git tools
     (wrapElectron github-desktop)
 
-    # Containers
-    docker
-
     # --- Windows managers tools ---
     nerd-fonts.jetbrains-mono
     wl-clipboard
@@ -119,6 +118,7 @@ in
       wallpaper = vars.wallpaper;
       background.type = "image";
       background.mode = "fill";
+      session.lock.enable = false;
     };
   };
 
@@ -147,6 +147,20 @@ in
 
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+  };
+
+  systemd.user.services.mutagen = {
+    Unit = {
+      Description = "Mutagen Sync Daemon";
+      After = [ "network.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.mutagen}/bin/mutagen daemon run";
+      Restart = "always";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
   };
 
   programs.home-manager.enable = true;
