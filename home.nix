@@ -78,7 +78,7 @@ in
 
     # NIX
     nix
-    nixfmt
+    nixfmt-tree
 
     # IDEs/editors
     jetbrains.rust-rover
