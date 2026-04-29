@@ -82,7 +82,6 @@ in
 
     # IDEs/editors
     jetbrains.rust-rover
-    (vscode.override { commandLineArgs = "--disable-features=WaylandPerSurfaceScale"; })
     pkgs-unstable.antigravity
 
     # Game engines
@@ -134,7 +133,7 @@ in
   # VS Code
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode.override {
+    package = pkgs-unstable.vscode.override {
       commandLineArgs = "--disable-features=WaylandPerSurfaceScale";
     };
     profiles.default.userSettings = {
