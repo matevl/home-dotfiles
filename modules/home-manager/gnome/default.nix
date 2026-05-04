@@ -1,9 +1,13 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  osConfig,
+  ...
+}:
 
 let
-  vars = import ../variables.nix;
-  wallpaper = vars.wallpaper;
-  lockWallpaper = vars.lockWallpaper;
+  wallpaper = osConfig.mySettings.wallpaper;
+  lockWallpaper = osConfig.mySettings.lockWallpaper;
 in
 {
   # Theme consistency (GNOME files/Nautilus will look good)

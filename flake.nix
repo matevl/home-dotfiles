@@ -19,6 +19,10 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -27,19 +31,36 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
+      nixos-hardware,
+      treefmt-nix,
       ...
     }@inputs:
     let
-      vars = import ./variables.nix;
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+      treefmtEval = treefmt-nix.lib.evalModule pkgs {
+        projectRootFile = "flake.nix";
+        programs.nixfmt.enable = true;
+        programs.nixfmt.package = pkgs.nixfmt-rfc-style;
+      };
+
+      overlays = [
+        (final: prev: {
+          unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        })
+      ];
+
       mkHost =
         hostname:
         nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            (./hosts + "/${hostname}/hardware-configuration.nix")
-            ./configuration.nix
-            inputs.dms.nixosModules.default
+            { nixpkgs.overlays = overlays; }
+            ./hosts/${hostname}
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -47,16 +68,22 @@
               home-manager.extraSpecialArgs = {
                 inherit inputs;
                 pkgs-unstable = import nixpkgs-unstable {
-                  system = "x86_64-linux";
+                  inherit system;
                   config.allowUnfree = true;
                 };
               };
-              home-manager.users.${vars.username} = import ./home.nix;
+              home-manager.users.mat = import ./modules/home-manager;
             }
           ];
         };
     in
     {
+      formatter.${system} = treefmtEval.config.build.wrapper;
+
+      devShells.${system}.default = pkgs.mkShell {
+        nativeBuildInputs = [ treefmtEval.config.build.wrapper ];
+      };
+
       nixosConfigurations = {
         laptop = mkHost "laptop";
       };

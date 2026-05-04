@@ -1,10 +1,11 @@
 {
   config,
   pkgs,
+  osConfig,
   ...
 }:
 let
-  vars = import ../variables.nix;
+  vars = osConfig.mySettings;
 in
 {
   programs.hyprlock = {
