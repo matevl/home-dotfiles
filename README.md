@@ -11,6 +11,15 @@ I use a dual-setup strategy to separate mindsets:
 ## 🛠️ Status
 ⚠️ **Work in Progress (WIP)** The configuration is constantly evolving as I refine my workflow.
 
+## 📁 Architecture
+
+A clean and simple overview of the repository structure:
+
+*   **`hosts/`**: Hardware-specific configurations for my different devices.
+*   **`modules/nixos/`**: Core system configuration, memory management, and system-level settings.
+*   **`modules/home-manager/`**: My personal environment, including browsers, small binaries, and application settings.
+*   **`wallpapers/`**: A basic set of wallpapers that I use across my devices.
+
 ## 🚀 Quick Apply
 To apply this configuration on the laptop:
 ```bash

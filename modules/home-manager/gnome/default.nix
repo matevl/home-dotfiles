@@ -1,8 +1,13 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  osConfig,
+  ...
+}:
 
 let
-  vars = import ../variables.nix;
-  wallpaper = vars.wallpaper;
+  wallpaper = osConfig.mySettings.wallpaper;
+  lockWallpaper = osConfig.mySettings.lockWallpaper;
 in
 {
   # Theme consistency (GNOME files/Nautilus will look good)
@@ -22,6 +27,9 @@ in
     "org/gnome/desktop/background" = {
       picture-uri = "file:///${wallpaper}";
       picture-uri-dark = "file:///${wallpaper}";
+    };
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///${lockWallpaper}";
     };
     "org/gnome/desktop/peripherals/touchpad" = {
       click-method = "areas";
