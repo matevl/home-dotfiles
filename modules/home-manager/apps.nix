@@ -34,17 +34,4 @@
     };
   };
 
-  # VS Code
-  programs.vscode = {
-    enable = true;
-    package = pkgs-unstable.vscode.override {
-      commandLineArgs = "--disable-features=WaylandPerSurfaceScale";
-    };
-    profiles.default.userSettings = {
-      "window.titleBarStyle" = "native";
-      "editor.fontSize" = 14;
-      "terminal.integrated.defaultProfile.linux" = "zsh";
-      "telemetry.telemetryLevel" = "off";
-    };
-  };
 }
