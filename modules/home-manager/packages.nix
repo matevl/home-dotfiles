@@ -67,6 +67,7 @@ in
     # NIX
     nix
     nixfmt-tree
+    nh
 
     # IDEs/editors
     (wrapJetBrains pkgs-unstable.jetbrains.rust-rover)
