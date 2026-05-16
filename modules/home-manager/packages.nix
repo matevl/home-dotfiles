@@ -12,6 +12,18 @@ let
           --append-flags "--disable-features=WaylandPerSurfaceScale"
       '';
     };
+  wrapJetBrains =
+    pkg:
+    pkgs.symlinkJoin {
+      name = "${pkg.pname or pkg.name}-wrapped";
+      paths = [ pkg ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/${pkg.pname or pkg.name} \
+          --set _JAVA_AWT_WM_NONREPARENTING 1 \
+          --add-flags "-Dwayland.enabled=true"
+      '';
+    };
 in
 {
   home.packages = with pkgs; [
@@ -57,7 +69,7 @@ in
     nixfmt-tree
 
     # IDEs/editors
-    jetbrains.rust-rover
+    (wrapJetBrains pkgs-unstable.jetbrains.rust-rover)
     pkgs-unstable.antigravity
 
     # Game engines

@@ -17,6 +17,12 @@
     options = "--delete-older-than 7d";
   };
 
+  # Nixpkgs configuration
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-38.8.4"
+  ];
+
   # Networking
   networking.networkmanager.enable = true;
   programs.ssh.package = pkgs.openssh_gssapi;
