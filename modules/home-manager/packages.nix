@@ -78,6 +78,7 @@ in
 
     # Git tools
     (wrapElectron github-desktop)
+    lazygit
 
     # --- Windows managers tools ---
     nerd-fonts.jetbrains-mono
