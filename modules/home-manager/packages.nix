@@ -84,5 +84,6 @@ in
     # --- Windows managers tools ---
     nerd-fonts.jetbrains-mono
     wl-clipboard
+    gnome-screenshot
   ];
 }

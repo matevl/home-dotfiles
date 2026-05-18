@@ -88,4 +88,8 @@ binds {
     Mod+Shift+underscore { move-column-to-workspace 8; }
     Mod+Shift+ccedilla { move-column-to-workspace 9; }
     Mod+Shift+agrave { move-column-to-workspace 10; }
+
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
 }
