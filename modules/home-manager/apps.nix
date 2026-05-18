@@ -13,16 +13,12 @@
     commandLineArgs = [ "--disable-features=WaylandPerSurfaceScale" ];
   };
 
-  # DMS
-  programs.dank-material-shell = {
-    enable = true;
-    enableSystemMonitoring = false;
-    settings = {
-      wallpaper = osConfig.mySettings.wallpaper;
-      background.type = "image";
-      background.mode = "fill";
-      session.lock.enable = false;
-    };
+  # DMS Config
+  xdg.configFile."DankMaterialShell/settings.json".text = builtins.toJSON {
+    wallpaper = osConfig.mySettings.wallpaper;
+    background.type = "image";
+    background.mode = "fill";
+    session.lock.enable = false;
   };
 
   # Kitty Terminal

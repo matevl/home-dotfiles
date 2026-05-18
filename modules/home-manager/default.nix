@@ -13,7 +13,6 @@
     ./hypr/hypridle.nix
     ./niri
     ./zsh
-    inputs.dms.homeModules.default
   ];
 
   home.username = osConfig.mySettings.username;

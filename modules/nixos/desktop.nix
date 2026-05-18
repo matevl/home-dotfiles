@@ -20,8 +20,8 @@
     totem # Video player
   ];
 
-  programs.dank-material-shell = {
-    enable = true;
-    enableSystemMonitoring = false;
-  };
+  environment.systemPackages = [
+    pkgs.unstable.dms-shell
+    pkgs.unstable.quickshell
+  ];
 }
