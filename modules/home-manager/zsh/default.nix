@@ -25,10 +25,8 @@
       claer = "clear";
 
       # Eza
-      eza-ls = "eza --group-directories-first";
-      eza-tree = "eza --group-directories-first --tree";
-      eza-git = "eza --git --group-directories-first";
-
+      ls = "eza --group-directories-first";
+      tree = "eza --group-directories-first --tree";
       clean-nixos = "sudo nix-collect-garbage -d";
     };
   };

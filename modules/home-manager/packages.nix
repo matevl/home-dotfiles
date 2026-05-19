@@ -32,10 +32,11 @@ in
     (wrapElectron deezer-desktop)
     nautilus
     vlc
+    resources
 
     # --- General tools ---
     btop
-    resources
+    zerotierone
 
     # --- Shell tools ---
     fastfetch
