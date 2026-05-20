@@ -33,6 +33,7 @@ in
     nautilus
     vlc
     resources
+    pkgs-unstable.moonlight-qt
 
     # --- General tools ---
     btop
