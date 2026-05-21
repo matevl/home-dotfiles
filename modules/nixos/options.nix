@@ -30,11 +30,11 @@
     };
     wallpaper = lib.mkOption {
       type = lib.types.str;
-      default = "/home/mat/home/wallpapers/mainwallpaper.png";
+      default = "/home/mat/home/wallpapers/main_wallpaper.png";
     };
     lockWallpaper = lib.mkOption {
       type = lib.types.str;
-      default = "/home/mat/home/wallpapers/lockwallpaper.png";
+      default = "/home/mat/home/wallpapers/lock_wallpaper.png";
     };
   };
 }

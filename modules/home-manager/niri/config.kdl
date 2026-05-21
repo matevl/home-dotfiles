@@ -37,7 +37,7 @@ window-rule {
 }
 
 spawn-at-startup "dms" "run"
-spawn-at-startup "dms" "ipc" "wallpaper" "set" "~/home/wallpapers/mainwallpaper.png"
+spawn-at-startup "dms" "ipc" "wallpaper" "set" "~/home/wallpapers/main_wallpaper.png"
 
 binds {
     Mod+Space { toggle-overview; }
