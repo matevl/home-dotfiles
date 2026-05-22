@@ -9,6 +9,7 @@
     };
     profiles.default = {
       extensions = with pkgs-unstable.vscode-extensions; [
+        # --- Code extensions ---
         # Python
         ms-python.python
         ms-python.vscode-pylance
@@ -24,13 +25,21 @@
         ms-vscode.makefile-tools
         ms-vscode.cmake-tools
 
-        # Data & Formats
+        # --- Data & Formats ---
+        # CSV
         mechatroner.rainbow-csv
+        # XML
         redhat.vscode-xml
+        # YML
         redhat.vscode-yaml
+        # TOML
+        tamasfe.even-better-toml
 
         # Docker
         ms-azuretools.vscode-docker
+
+        # PDF viewer
+        tomoki1207.pdf
 
         # Typst
         myriad-dreamin.tinymist
