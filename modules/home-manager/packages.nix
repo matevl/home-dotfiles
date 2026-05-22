@@ -49,7 +49,6 @@ in
 
     # --- Code tools ---
     # C/C++
-    gcc
     gnumake
     cmake
 
