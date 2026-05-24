@@ -1,17 +1,19 @@
 { pkgs, pkgs-unstable, ... }:
 
 let
-  wrapElectron = pkg: pkgs.symlinkJoin {
-    name = "${pkg.pname or pkg.name}-wrapped";
-    paths = [ pkg ];
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      rm -f $out/bin/${pkg.meta.mainProgram or pkg.pname or pkg.name}
-      makeWrapper ${pkg}/bin/${pkg.meta.mainProgram or pkg.pname or pkg.name} \
-        $out/bin/${pkg.meta.mainProgram or pkg.pname or pkg.name} \
-        --append-flags "--disable-features=WaylandPerSurfaceScale"
-    '';
-  };
+  wrapElectron =
+    pkg:
+    pkgs.symlinkJoin {
+      name = "${pkg.pname or pkg.name}-wrapped";
+      paths = [ pkg ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        rm -f $out/bin/${pkg.meta.mainProgram or pkg.pname or pkg.name}
+        makeWrapper ${pkg}/bin/${pkg.meta.mainProgram or pkg.pname or pkg.name} \
+          $out/bin/${pkg.meta.mainProgram or pkg.pname or pkg.name} \
+          --append-flags "--disable-features=WaylandPerSurfaceScale"
+      '';
+    };
   wrapJetBrains =
     pkg:
     pkgs.symlinkJoin {

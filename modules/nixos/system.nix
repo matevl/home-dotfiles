@@ -5,26 +5,29 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Nix settings
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.auto-optimise-store = true;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
   # Nixpkgs configuration
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "electron-38.8.4"
   ];
 
+  # Nix settings
   nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
+    auto-optimise-store = true;
     download-buffer-size = 536870912;
+    min-free = 10 * 1024 * 1024 * 1024;
+    max-free = 20 * 1024 * 1024 * 1024;
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   # Networking
