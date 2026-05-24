@@ -23,6 +23,10 @@
     "electron-38.8.4"
   ];
 
+  nix.settings = {
+    download-buffer-size = 536870912;
+  };
+
   # Networking
   networking.networkmanager.enable = true;
   programs.ssh.package = pkgs.openssh_gssapi;
