@@ -19,6 +19,7 @@
 
         # Nix
         jnoortheen.nix-ide
+        mkhl.direnv
 
         # C++
         ms-vscode.cpptools

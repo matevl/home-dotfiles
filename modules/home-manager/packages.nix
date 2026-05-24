@@ -89,5 +89,9 @@ in
     nerd-fonts.jetbrains-mono
     wl-clipboard
     gnome-screenshot
+
+    # --- Multimedia controls ---
+    brightnessctl
+    wireplumber
   ];
 }
