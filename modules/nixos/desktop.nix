@@ -1,27 +1,39 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services = {
+    xserver = {
+      enable = true;
+      # -- X11 / Wayland --
+      xkb = {
+        layout = config.mySettings.keyboardLayout;
+        variant = "";
+      };
+    };
+
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
   programs.niri.enable = true;
 
-  # Disable unnecessary default GNOME applications
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-tour
-    gnome-console
-    epiphany # Web browser
-    geary # Mail client
-    gnome-music
-    gnome-calendar
-    gnome-contacts
-    gnome-maps
-    gnome-weather
-    totem # Video player
-  ];
+  environment = {
+    systemPackages = [
+      pkgs.unstable.dms-shell
+      pkgs.unstable.quickshell
+    ];
 
-  environment.systemPackages = [
-    pkgs.unstable.dms-shell
-    pkgs.unstable.quickshell
-  ];
+    # Disable unnecessary default GNOME applications
+    gnome.excludePackages = with pkgs; [
+      gnome-tour
+      gnome-console
+      epiphany # Web browser
+      geary # Mail client
+      gnome-music
+      gnome-calendar
+      gnome-contacts
+      gnome-maps
+      gnome-weather
+      totem # Video player
+    ];
+  };
 }

@@ -2,56 +2,51 @@
 
 {
   # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Nixpkgs configuration
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-38.8.4"
-  ];
-
-  # Nix settings
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-
-    auto-optimise-store = true;
-    download-buffer-size = 536870912;
-    min-free = 10 * 1024 * 1024 * 1024;
-    max-free = 20 * 1024 * 1024 * 1024;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  # Nixpkgs configuration
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-38.8.4"
+    ];
+  };
+
+  # Nix configuration
+  nix = {
+    # GC options
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+
+    # Nix settings
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+
+      auto-optimise-store = true;
+      download-buffer-size = 536870912;
+      min-free = 10 * 1024 * 1024 * 1024;
+      max-free = 20 * 1024 * 1024 * 1024;
+    };
   };
 
   # Networking
   networking.networkmanager.enable = true;
-  programs.ssh.package = pkgs.openssh_gssapi;
 
   # Time zone and Locale
   time.timeZone = config.mySettings.timeZone;
   i18n.defaultLocale = config.mySettings.defaultLocale;
   console.keyMap = config.mySettings.keyboardLayout;
 
-  services.xserver.xkb = {
-    layout = config.mySettings.keyboardLayout;
-    variant = "";
-  };
-
-  # -- RAM / OOM Optimizations --
-  services.earlyoom = {
-    enable = true;
-    enableNotifications = true;
-    freeMemThreshold = 5;
-    freeMemKillThreshold = 1;
-  };
-
+  # Swap
   zramSwap = {
     enable = true;
     priority = 1000;
@@ -59,13 +54,27 @@
   };
 
   # Services
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-  security.polkit.enable = true;
+  services = {
+    gnome.gnome-keyring.enable = true;
 
-  services.logind.settings.Login = {
-    HandleLidSwitch = "suspend";
-    HandleLidSwitchExternalPower = "suspend";
+    logind.settings.Login = {
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchExternalPower = "suspend";
+    };
+
+    # -- RAM / OOM Optimizations --
+    earlyoom = {
+      enable = true;
+      enableNotifications = true;
+      freeMemThreshold = 5;
+      freeMemKillThreshold = 1;
+    };
+  };
+
+  # Security
+  security = {
+    polkit.enable = true;
+    pam.services.login.enableGnomeKeyring = true;
   };
 
   # System packages
@@ -81,10 +90,15 @@
     steam-run
   ];
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc.lib
-  ];
+  # Programs
+  programs = {
+    nix-ld.enable = true;
+    nix-ld.libraries = with pkgs; [
+      stdenv.cc.cc.lib
+    ];
+
+    ssh.package = pkgs.openssh_gssapi;
+  };
 
   system.stateVersion = config.mySettings.stateVersion;
 }
