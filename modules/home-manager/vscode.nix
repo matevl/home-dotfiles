@@ -11,7 +11,7 @@
       extensions = with pkgs-unstable.vscode-extensions; [
         # --- Code extensions ---
         # Python
-        #ms-python.python
+        ms-python.python
         ms-python.vscode-pylance
 
         # Godot
