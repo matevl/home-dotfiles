@@ -65,6 +65,9 @@ in
     uv
     ruff
 
+    # JS/TS
+    yarn
+
     # NIX
     nix
     nixfmt-tree

@@ -15,8 +15,12 @@
     ./zsh
   ];
 
-  home.username = osConfig.mySettings.username;
-  home.homeDirectory = "/home/${osConfig.mySettings.username}";
-  home.stateVersion = osConfig.mySettings.stateVersion;
+  home = {
+    # --- User info ---
+    username = osConfig.mySettings.username;
+    homeDirectory = "/home/${osConfig.mySettings.username}";
+    stateVersion = osConfig.mySettings.stateVersion;
+  };
+
   programs.home-manager.enable = true;
 }

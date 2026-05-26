@@ -9,7 +9,7 @@
     };
     profiles.default = {
       extensions = with pkgs-unstable.vscode-extensions; [
-        # --- Code extensions ---
+        # --- Programming Languages ---
         # Python
         ms-python.python
         ms-python.vscode-pylance
