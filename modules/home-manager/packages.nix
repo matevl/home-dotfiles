@@ -65,9 +65,6 @@ in
     uv
     ruff
 
-    # JS/TS
-    nodejs
-
     # NIX
     nix
     nixfmt-tree
