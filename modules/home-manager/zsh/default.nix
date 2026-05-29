@@ -24,9 +24,14 @@
     shellAliases = {
       claer = "clear";
 
-      # Eza
+      # Tools
+      top = "btop";
+      fetch = "fastfetch";
       ls = "eza --group-directories-first";
       tree = "eza --group-directories-first --tree";
+      vim = "hx";
+      nvim = "hx";
+
       clean-nixos = "sudo nix-collect-garbage -d";
     };
   };
