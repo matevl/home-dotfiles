@@ -13,6 +13,25 @@
 
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+      wireplumber = {
+        enable = true;
+        extraConfig = {
+          "10-bluetooth-policy" = {
+            "wireplumber.settings" = {
+              "bluetooth.autoswitch-to-headset-profile" = false;
+            };
+          };
+        };
+      };
+    };
+
+    blueman.enable = true;
+
   };
   programs.niri.enable = true;
 

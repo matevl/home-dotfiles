@@ -41,6 +41,18 @@
   # Networking
   networking.networkmanager.enable = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        ControllerMode = "dual";
+        Experimental = true;
+        FastConnectable = false;
+      };
+    };
+  };
+
   # Time zone and Locale
   time.timeZone = config.mySettings.timeZone;
   i18n.defaultLocale = config.mySettings.defaultLocale;
@@ -87,6 +99,7 @@
     wget
     curl
     networkmanagerapplet
+    bluez
     steam-run
   ];
 

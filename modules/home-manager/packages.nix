@@ -47,7 +47,6 @@ in
     bat
     screen
     mutagen
-    docker
 
     # --- Code tools ---
     # C/C++
@@ -92,6 +91,6 @@ in
 
     # --- Multimedia controls ---
     brightnessctl
-    wireplumber
+    pavucontrol
   ];
 }
