@@ -13,6 +13,18 @@
 
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse = {
+        enable = true;
+      };
+      wireplumber.enable = true;
+    };
+
+    blueman.enable = true;
+
   };
   programs.niri.enable = true;
 

@@ -41,6 +41,17 @@
   # Networking
   networking.networkmanager.enable = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        FastConnectable = true;
+      };
+    };
+  };
+
   # Time zone and Locale
   time.timeZone = config.mySettings.timeZone;
   i18n.defaultLocale = config.mySettings.defaultLocale;
