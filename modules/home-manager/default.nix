@@ -4,6 +4,7 @@
   imports = [
     ./packages.nix
     ./apps.nix
+    ./vscode.nix
     ./shell.nix
     ./services.nix
     ./gnome
@@ -12,11 +13,14 @@
     ./hypr/hypridle.nix
     ./niri
     ./zsh
-    inputs.dms.homeModules.default
   ];
 
-  home.username = osConfig.mySettings.username;
-  home.homeDirectory = "/home/${osConfig.mySettings.username}";
-  home.stateVersion = osConfig.mySettings.stateVersion;
+  home = {
+    # --- User info ---
+    username = osConfig.mySettings.username;
+    homeDirectory = "/home/${osConfig.mySettings.username}";
+    stateVersion = osConfig.mySettings.stateVersion;
+  };
+
   programs.home-manager.enable = true;
 }

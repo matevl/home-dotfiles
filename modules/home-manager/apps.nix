@@ -13,16 +13,12 @@
     commandLineArgs = [ "--disable-features=WaylandPerSurfaceScale" ];
   };
 
-  # DMS
-  programs.dank-material-shell = {
-    enable = true;
-    enableSystemMonitoring = false;
-    settings = {
-      wallpaper = osConfig.mySettings.wallpaper;
-      background.type = "image";
-      background.mode = "fill";
-      session.lock.enable = false;
-    };
+  # DMS Config
+  xdg.configFile."DankMaterialShell/settings.json".text = builtins.toJSON {
+    wallpaper = osConfig.mySettings.wallpaper;
+    background.type = "image";
+    background.mode = "fill";
+    session.lock.enable = false;
   };
 
   # Kitty Terminal
@@ -34,17 +30,9 @@
     };
   };
 
-  # VS Code
-  programs.vscode = {
+  # Obsidian
+  programs.obsidian = {
     enable = true;
-    package = pkgs-unstable.vscode.override {
-      commandLineArgs = "--disable-features=WaylandPerSurfaceScale";
-    };
-    profiles.default.userSettings = {
-      "window.titleBarStyle" = "native";
-      "editor.fontSize" = 14;
-      "terminal.integrated.defaultProfile.linux" = "zsh";
-      "telemetry.telemetryLevel" = "off";
-    };
+    package = pkgs-unstable.obsidian;
   };
 }

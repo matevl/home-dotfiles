@@ -37,7 +37,7 @@ window-rule {
 }
 
 spawn-at-startup "dms" "run"
-spawn-at-startup "dms" "ipc" "wallpaper" "set" "~/home/wallpapers/mainwallpaper.png"
+spawn-at-startup "dms" "ipc" "wallpaper" "set" "~/home/wallpapers/main_wallpaper.png"
 
 binds {
     Mod+Space { toggle-overview; }
@@ -47,6 +47,12 @@ binds {
     Mod+Shift+Q { close-window; }
     Mod+H { show-hotkey-overlay; }
     Ctrl+Alt+L { spawn "hyprlock"; }
+
+    XF86MonBrightnessUp { spawn "brightnessctl" "set" "10%+"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     
     Mod+Left  { focus-column-left; }
     Mod+Right { focus-column-right; }
@@ -88,4 +94,8 @@ binds {
     Mod+Shift+underscore { move-column-to-workspace 8; }
     Mod+Shift+ccedilla { move-column-to-workspace 9; }
     Mod+Shift+agrave { move-column-to-workspace 10; }
+
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
 }
