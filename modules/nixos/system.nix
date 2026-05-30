@@ -46,8 +46,9 @@
     powerOnBoot = true;
     settings = {
       General = {
+        ControllerMode = "dual";
         Experimental = true;
-        FastConnectable = true;
+        FastConnectable = false;
       };
     };
   };
@@ -98,6 +99,7 @@
     wget
     curl
     networkmanagerapplet
+    bluez
     steam-run
   ];
 

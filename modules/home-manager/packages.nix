@@ -91,5 +91,6 @@ in
 
     # --- Multimedia controls ---
     brightnessctl
+    pavucontrol
   ];
 }

@@ -17,10 +17,17 @@
     pipewire = {
       enable = true;
       alsa.enable = true;
-      pulse = {
+      pulse.enable = true;
+      wireplumber = {
         enable = true;
+        extraConfig = {
+          "10-bluetooth-policy" = {
+            "wireplumber.settings" = {
+              "bluetooth.autoswitch-to-headset-profile" = false;
+            };
+          };
+        };
       };
-      wireplumber.enable = true;
     };
 
     blueman.enable = true;
