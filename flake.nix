@@ -1,17 +1,17 @@
 {
-  description = "Mat's Clean NixOS 25.11 Config";
+  description = "Mat's NixOS 26.05 Config";
 
   # To update
   # sudo nixos-rebuild switch --flake .#name
 
   inputs = {
-    # nixpkgs version (25.11)
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    # nixpkgs version (26.05)
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home Manager for 25.11
+    # Home Manager for 26.05
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

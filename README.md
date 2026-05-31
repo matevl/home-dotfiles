@@ -1,6 +1,6 @@
 # Mat's NixOS Configuration
 
-This repository contains my personal **NixOS 25.11** configuration, managed with **Flakes** and **Home Manager**.
+This repository contains my personal **NixOS 26.05** configuration, managed with **Flakes** and **Home Manager**.
 
 ## Desktop Environments
 
