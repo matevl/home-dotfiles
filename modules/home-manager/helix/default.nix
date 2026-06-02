@@ -98,7 +98,7 @@
           command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         };
         typescript-language-server = {
-          command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
+          command = "${pkgs.typescript-language-server}/bin/typescript-language-server";
           args = [ "--stdio" ];
         };
         clangd = {
@@ -115,7 +115,7 @@
           command = "${pkgs.lemminx}/bin/lemminx";
         };
         yaml-language-server = {
-          command = "${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server";
+          command = "${pkgs.yaml-language-server}/bin/yaml-language-server";
           args = [ "--stdio" ];
         };
         taplo = {
