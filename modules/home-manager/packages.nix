@@ -48,6 +48,8 @@ in
     screen
     mutagen
 
+    ngrok
+
     # --- Code tools ---
     # C/C++
     gnumake
