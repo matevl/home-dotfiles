@@ -18,6 +18,7 @@
 
     initContent = ''
       setopt HIST_IGNORE_SPACE
+      export NIXPKGS_ALLOW_UNFREE=1
       fastfetch
     '';
 
