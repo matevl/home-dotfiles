@@ -7,5 +7,6 @@
     ./desktop.nix
     ./users.nix
     ./docker.nix
+    ./game.nix
   ];
 }
