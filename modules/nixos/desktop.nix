@@ -52,7 +52,6 @@
       gnome-contacts
       gnome-maps
       gnome-weather
-      totem # Video player
     ];
   };
 }
