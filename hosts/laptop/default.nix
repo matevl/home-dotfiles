@@ -10,4 +10,6 @@
   ];
 
   networking.hostName = config.mySettings.hostName;
+
+  mySettings.game.enable = true;
 }

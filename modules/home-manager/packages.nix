@@ -48,6 +48,8 @@ in
     screen
     mutagen
 
+    ngrok
+
     # --- Code tools ---
     # C/C++
     gnumake
@@ -74,7 +76,7 @@ in
 
     # IDEs/editors
     (wrapJetBrains pkgs-unstable.jetbrains.rust-rover)
-    pkgs-unstable.antigravity
+    pkgs-unstable.antigravity-ide
 
     # Game engines
     pkgs-unstable.godot_4
