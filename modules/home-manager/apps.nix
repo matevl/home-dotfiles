@@ -53,6 +53,7 @@
         "video/ogg" = [ "org.videolan.VLC.desktop" "org.gnome.Totem.desktop" ];
         "video/3gpp" = [ "org.videolan.VLC.desktop" "org.gnome.Totem.desktop" ];
         "video/3gpp2" = [ "org.videolan.VLC.desktop" "org.gnome.Totem.desktop" ];
+	"video/mkv" = [ "org.videolan.VLC.desktop" "org.gnome.Totem.desktop" ];
 
         "text/html" = [ "brave-browser.desktop" ];
         "x-scheme-handler/http" = [ "brave-browser.desktop" ];
