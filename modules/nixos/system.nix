@@ -63,6 +63,11 @@
     enable = true;
     priority = 1000;
     algorithm = "zstd";
+    memoryPercent = 50;
+  };
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 100;
   };
 
   # Services
@@ -79,7 +84,7 @@
       enable = true;
       enableNotifications = true;
       freeMemThreshold = 5;
-      freeMemKillThreshold = 1;
+      freeMemKillThreshold = 2;
     };
   };
 
