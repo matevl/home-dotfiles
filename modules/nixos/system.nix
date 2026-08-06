@@ -78,14 +78,6 @@
       HandleLidSwitch = "suspend";
       HandleLidSwitchExternalPower = "suspend";
     };
-
-    # -- RAM / OOM Optimizations --
-    earlyoom = {
-      enable = true;
-      enableNotifications = true;
-      freeMemThreshold = 5;
-      freeMemKillThreshold = 2;
-    };
   };
 
   # Security
@@ -119,4 +111,9 @@
   };
 
   system.stateVersion = config.mySettings.stateVersion;
+  # -- RAM / OOM Optimizations --
+  systemd.oomd = {
+    enable = true;
+    enableUserSlices = true;
+  };
 }
