@@ -14,18 +14,20 @@ let
           --append-flags "--disable-features=WaylandPerSurfaceScale"
       '';
     };
-  wrapJetBrains =
-    pkg:
-    pkgs.symlinkJoin {
-      name = "${pkg.pname or pkg.name}-wrapped";
-      paths = [ pkg ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/${pkg.pname or pkg.name} \
-          --set _JAVA_AWT_WM_NONREPARENTING 1 \
-          --add-flags "-Dwayland.enabled=true"
-      '';
-    };
+  /*
+    wrapJetBrains =
+      pkg:
+      pkgs.symlinkJoin {
+        name = "${pkg.pname or pkg.name}-wrapped";
+        paths = [ pkg ];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/${pkg.pname or pkg.name} \
+            --set _JAVA_AWT_WM_NONREPARENTING 1 \
+            --add-flags "-Dwayland.enabled=true"
+        '';
+      };
+  */
 in
 {
   home.packages = with pkgs; [
@@ -69,13 +71,15 @@ in
     # JS/TS
     yarn
 
+    # Nix language server
+    nixd
+
     # NIX
     nix
     nixfmt-tree
     nh
 
     # IDEs/editors
-    (wrapJetBrains pkgs-unstable.jetbrains.rust-rover)
     pkgs-unstable.antigravity-ide
 
     # Game engines
@@ -83,6 +87,7 @@ in
     pkgs-unstable.gdtoolkit_4
 
     # Git tools
+    pre-commit
     (wrapElectron pkgs-unstable.github-desktop)
     lazygit
 
