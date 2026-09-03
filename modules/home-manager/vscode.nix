@@ -19,6 +19,7 @@
         # Python
         ms-python.python
         ms-python.vscode-pylance
+        charliermarsh.ruff
 
         # Godot
         geequlim.godot-tools
@@ -27,8 +28,19 @@
         jnoortheen.nix-ide
         mkhl.direnv
 
+        # Java
+        redhat.java
+        vscjava.vscode-java-debug
+        vscjava.vscode-java-test
+        vscjava.vscode-maven
+        vscjava.vscode-gradle
+
+        # JavaScript / TypeScript
+        dbaeumer.vscode-eslint
+        esbenp.prettier-vscode
+
         # C++
-        ms-vscode.cpptools
+        llvm-vs-code-extensions.vscode-clangd
         ms-vscode.makefile-tools
         ms-vscode.cmake-tools
 
@@ -66,9 +78,7 @@
         # --- Editor ---
         "editor.fontSize" = 14;
         "editor.formatOnSave" = true;
-        "editor.defaultFormatter" = "rust-lang.rust-analyzer";
         "editor.codeActionsOnSave" = {
-          "source.fixAll.clippy" = "explicit";
           "source.organizeImports" = "explicit";
         };
 
@@ -79,6 +89,10 @@
         "[rust]" = {
           "editor.defaultFormatter" = "rust-lang.rust-analyzer";
           "editor.formatOnSave" = true;
+          "editor.codeActionsOnSave" = {
+            "source.fixAll.clippy" = "explicit";
+            "source.organizeImports" = "explicit";
+          };
         };
         "rust-analyzer.check.command" = "clippy";
         "rust-analyzer.check.extraArgs" = [
@@ -93,6 +107,61 @@
         "rust-analyzer.diagnostics.enable" = true;
         "rust-analyzer.diagnostics.warningsAsHint" = [ ];
         "rust-analyzer.procMacro.enable" = true;
+
+        # --- Python ---
+        "[python]" = {
+          "editor.defaultFormatter" = "charliermarsh.ruff";
+          "editor.formatOnSave" = true;
+          "editor.codeActionsOnSave" = {
+            "source.fixAll.ruff" = "explicit";
+            "source.organizeImports.ruff" = "explicit";
+          };
+        };
+
+        # --- JavaScript / TypeScript ---
+        "[javascript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          "editor.formatOnSave" = true;
+          "editor.codeActionsOnSave" = {
+            "source.fixAll.eslint" = "explicit";
+            "source.organizeImports" = "explicit";
+          };
+        };
+        "[typescript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          "editor.formatOnSave" = true;
+          "editor.codeActionsOnSave" = {
+            "source.fixAll.eslint" = "explicit";
+            "source.organizeImports" = "explicit";
+          };
+        };
+
+        # --- C / C++ ---
+        "[c]" = {
+          "editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
+          "editor.formatOnSave" = true;
+        };
+        "[cpp]" = {
+          "editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
+          "editor.formatOnSave" = true;
+        };
+
+        # --- Java ---
+        "[java]" = {
+          "editor.defaultFormatter" = "redhat.java";
+          "editor.formatOnSave" = true;
+        };
+
+        # --- Nix ---
+        "[nix]" = {
+          "editor.defaultFormatter" = "jnoortheen.nix-ide";
+          "editor.formatOnSave" = true;
+        };
+
+        # --- GDScript ---
+        "[gdscript]" = {
+          "editor.formatOnSave" = true;
+        };
 
         # --- CodeLLDB (Debugging) ---
         "lldb.displayFormat" = "auto";

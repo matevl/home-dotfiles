@@ -1,0 +1,20 @@
+repos:
+  - repo: local
+    hooks:
+      - id: treefmt
+        name: Format with treefmt
+        entry: treefmt .
+        language: system
+        pass_filenames: false
+
+      - id: nix-flake-check
+        name: Check Nix flake evaluation
+        entry: nix flake check --no-build
+        language: system
+        pass_filenames: false
+
+      - id: niri-validate
+        name: Validate Niri configuration
+        entry: niri validate --config modules/home-manager/niri/config.kdl
+        language: system
+        pass_filenames: false

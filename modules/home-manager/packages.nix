@@ -71,6 +71,9 @@ in
     # JS/TS
     yarn
 
+    # Nix language server
+    nixd
+
     # NIX
     nix
     nixfmt-tree
@@ -84,6 +87,7 @@ in
     pkgs-unstable.gdtoolkit_4
 
     # Git tools
+    pre-commit
     (wrapElectron pkgs-unstable.github-desktop)
     lazygit
 
