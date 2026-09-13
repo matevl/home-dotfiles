@@ -42,6 +42,7 @@ in
     # --- General tools ---
     btop
     zerotierone
+    ngrok
 
     # --- Shell tools ---
     fastfetch
@@ -50,12 +51,11 @@ in
     screen
     mutagen
 
-    ngrok
-
     # --- Code tools ---
     # C/C++
     gnumake
     cmake
+    clang-tools
 
     # Rust
     rustc
@@ -71,16 +71,11 @@ in
     # JS/TS
     yarn
 
-    # Nix language server
-    nixd
-
     # NIX
     nix
     nixfmt-tree
     nh
-
-    # IDEs/editors
-    pkgs-unstable.antigravity-ide
+    nixd
 
     # Game engines
     pkgs-unstable.godot_4

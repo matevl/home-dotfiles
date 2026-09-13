@@ -36,7 +36,7 @@
       treefmtEval = treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
         programs.nixfmt.enable = true;
-        programs.nixfmt.package = pkgs.nixfmt-rfc-style;
+        programs.nixfmt.package = pkgs.nixfmt;
       };
 
       overlays = [

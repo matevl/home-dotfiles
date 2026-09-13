@@ -96,7 +96,7 @@
           command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         };
         clangd = {
-          command = "clangd";
+          command = "${pkgs.clang-tools}/bin/clangd";
         };
         godot = {
           command = "${pkgs.netcat}/bin/nc";
