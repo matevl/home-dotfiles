@@ -7,6 +7,7 @@
     package = pkgs-unstable.vscode.override {
       commandLineArgs = "--disable-features=WaylandPerSurfaceScale";
     };
+
     profiles.default = {
       extensions = with pkgs-unstable.vscode-extensions; [
         # --- Programming Languages ---
@@ -25,7 +26,7 @@
         geequlim.godot-tools
 
         # Nix
-        jnoortheen.nix-ide
+        bbenoist.nix
         mkhl.direnv
 
         # Java
