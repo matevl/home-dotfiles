@@ -2,9 +2,9 @@
 
 {
   # VS Code
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
-    package = pkgs-unstable.vscode.override {
+    package = pkgs-unstable.vscodium.override {
       commandLineArgs = "--disable-features=WaylandPerSurfaceScale";
     };
 
@@ -155,7 +155,7 @@
 
         # --- Nix ---
         "[nix]" = {
-          "editor.defaultFormatter" = "jnoortheen.nix-ide";
+          "editor.defaultFormatter" = "bbenoist.nix";
           "editor.formatOnSave" = true;
         };
 
