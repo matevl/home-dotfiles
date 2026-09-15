@@ -83,7 +83,7 @@ in
 
     # Git tools
     pre-commit
-    (wrapElectron pkgs-unstable.github-desktop)
+    gitg
     lazygit
 
     # --- Windows managers tools ---
