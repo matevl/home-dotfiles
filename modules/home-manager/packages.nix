@@ -14,18 +14,20 @@ let
           --append-flags "--disable-features=WaylandPerSurfaceScale"
       '';
     };
-  wrapJetBrains =
-    pkg:
-    pkgs.symlinkJoin {
-      name = "${pkg.pname or pkg.name}-wrapped";
-      paths = [ pkg ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/${pkg.pname or pkg.name} \
-          --set _JAVA_AWT_WM_NONREPARENTING 1 \
-          --add-flags "-Dwayland.enabled=true"
-      '';
-    };
+  /*
+    wrapJetBrains =
+      pkg:
+      pkgs.symlinkJoin {
+        name = "${pkg.pname or pkg.name}-wrapped";
+        paths = [ pkg ];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/${pkg.pname or pkg.name} \
+            --set _JAVA_AWT_WM_NONREPARENTING 1 \
+            --add-flags "-Dwayland.enabled=true"
+        '';
+      };
+  */
 in
 {
   home.packages = with pkgs; [
@@ -40,6 +42,7 @@ in
     # --- General tools ---
     btop
     zerotierone
+    ngrok
 
     # --- Shell tools ---
     fastfetch
@@ -48,12 +51,11 @@ in
     screen
     mutagen
 
-    ngrok
-
     # --- Code tools ---
     # C/C++
     gnumake
     cmake
+    clang-tools
 
     # Rust
     rustc
@@ -73,17 +75,15 @@ in
     nix
     nixfmt-tree
     nh
-
-    # IDEs/editors
-    (wrapJetBrains pkgs-unstable.jetbrains.rust-rover)
-    pkgs-unstable.antigravity-ide
+    nixd
 
     # Game engines
     pkgs-unstable.godot_4
     pkgs-unstable.gdtoolkit_4
 
     # Git tools
-    (wrapElectron pkgs-unstable.github-desktop)
+    pre-commit
+    gitg
     lazygit
 
     # --- Windows managers tools ---
