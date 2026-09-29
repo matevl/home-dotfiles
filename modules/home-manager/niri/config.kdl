@@ -38,6 +38,7 @@ window-rule {
 
 spawn-at-startup "dms" "run"
 spawn-at-startup "dms" "ipc" "wallpaper" "set" "~/home-dotfiles/wallpapers/main_wallpaper.png"
+spawn-at-startup "xwayland-satellite"
 
 binds {
     Mod+Space { toggle-overview; }
@@ -70,6 +71,8 @@ binds {
     Mod+semicolon { consume-or-expel-window-left; }
     Mod+colon { consume-or-expel-window-right; }
     Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+M { maximize-window-to-edges; }
     Mod+R { switch-preset-column-width; }
 
 
