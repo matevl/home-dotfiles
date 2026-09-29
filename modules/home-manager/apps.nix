@@ -133,7 +133,7 @@
   programs.chromium = {
     enable = true;
     package = pkgs.brave;
-    commandLineArgs = [ "--disable-features=WaylandPerSurfaceScale" ];
+    #commandLineArgs = [ "--disable-features=WaylandPerSurfaceScale" ];
   };
 
   # Kitty Terminal

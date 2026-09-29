@@ -70,6 +70,7 @@
         # --- General productivity ---
         # Better Comments
         aaron-bond.better-comments
+        mhutchie.git-graph
       ];
       userSettings = {
         # --- Window & General ---

@@ -90,6 +90,7 @@ in
     nerd-fonts.jetbrains-mono
     wl-clipboard
     gnome-screenshot
+    xwayland-satellite
 
     # --- Multimedia controls ---
     brightnessctl
