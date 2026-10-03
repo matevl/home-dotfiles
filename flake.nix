@@ -36,7 +36,7 @@
       treefmtEval = treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
         programs.nixfmt.enable = true;
-        programs.nixfmt.package = pkgs.nixfmt-rfc-style;
+        programs.nixfmt.package = pkgs.nixfmt;
       };
 
       overlays = [
@@ -76,7 +76,11 @@
       formatter.${system} = treefmtEval.config.build.wrapper;
 
       devShells.${system}.default = pkgs.mkShell {
-        nativeBuildInputs = [ treefmtEval.config.build.wrapper ];
+        nativeBuildInputs = with pkgs; [
+          pre-commit
+          niri
+          treefmtEval.config.build.wrapper
+        ];
       };
 
       nixosConfigurations = {

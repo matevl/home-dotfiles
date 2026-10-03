@@ -63,6 +63,11 @@
     enable = true;
     priority = 1000;
     algorithm = "zstd";
+    memoryPercent = 50;
+  };
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 100;
   };
 
   # Services
@@ -72,14 +77,6 @@
     logind.settings.Login = {
       HandleLidSwitch = "suspend";
       HandleLidSwitchExternalPower = "suspend";
-    };
-
-    # -- RAM / OOM Optimizations --
-    earlyoom = {
-      enable = true;
-      enableNotifications = true;
-      freeMemThreshold = 5;
-      freeMemKillThreshold = 1;
     };
   };
 
@@ -114,4 +111,9 @@
   };
 
   system.stateVersion = config.mySettings.stateVersion;
+  # -- RAM / OOM Optimizations --
+  systemd.oomd = {
+    enable = true;
+    enableUserSlices = true;
+  };
 }
