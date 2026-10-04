@@ -2,9 +2,17 @@
 
 {
   # Bootloader
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    kernel.sysctl = {
+      "vm.swappiness" = 100;
+    };
+
+    supportedFilesystems = [ "ntfs" ];
   };
 
   # Nixpkgs configuration
@@ -64,10 +72,6 @@
     priority = 1000;
     algorithm = "zstd";
     memoryPercent = 50;
-  };
-
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 100;
   };
 
   # Services
