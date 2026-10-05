@@ -34,5 +34,8 @@ in
     "org/gnome/desktop/peripherals/touchpad" = {
       click-method = "areas";
     };
+    "org/gnome/mutter" = {
+      check-alive-timeout = 10000;
+    };
   };
 }

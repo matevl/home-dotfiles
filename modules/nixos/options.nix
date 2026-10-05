@@ -43,5 +43,12 @@
         description = "Enable Steam, Proton, and gaming optimizations";
       };
     };
+    nvidia = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable Nvidia proprietary drivers and hardware acceleration";
+      };
+    };
   };
 }
