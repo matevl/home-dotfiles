@@ -9,7 +9,7 @@ repos:
 
       - id: nix-flake-check
         name: Check Nix flake evaluation
-        entry: nix flake check --no-build
+        entry: nix flake check --no-build --impure
         language: system
         pass_filenames: false
 
