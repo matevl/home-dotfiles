@@ -101,7 +101,6 @@
     curl
     networkmanagerapplet
     bluez
-    steam-run
   ];
 
   # Programs

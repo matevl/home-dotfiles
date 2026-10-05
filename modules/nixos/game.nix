@@ -7,12 +7,17 @@
 
 {
   config = lib.mkIf config.mySettings.game.enable {
+    environment.systemPackages = with pkgs; [
+      steam-run
+    ];
+
     hardware = {
       graphics = {
         enable = true;
         enable32Bit = true;
       };
 
+      xone.enable = true;
       steam-hardware.enable = true;
     };
 
