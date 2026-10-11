@@ -8,5 +8,6 @@
     ./users.nix
     ./docker.nix
     ./game.nix
+    ../../hardware-configuration.nix
   ];
 }

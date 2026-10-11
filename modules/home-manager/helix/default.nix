@@ -55,11 +55,9 @@
         }
         {
           name = "typescript";
-          language-servers = [ "typescript-language-server" ];
         }
         {
           name = "javascript";
-          language-servers = [ "typescript-language-server" ];
         }
         {
           name = "cpp";
@@ -96,10 +94,6 @@
         };
         rust-analyzer = {
           command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-        };
-        typescript-language-server = {
-          command = "${pkgs.typescript-language-server}/bin/typescript-language-server";
-          args = [ "--stdio" ];
         };
         clangd = {
           command = "${pkgs.clang-tools}/bin/clangd";

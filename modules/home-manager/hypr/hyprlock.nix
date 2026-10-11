@@ -9,7 +9,7 @@ let
 in
 {
   programs.hyprlock = {
-    enable = true;
+    enable = false;
     settings = {
       background = [
         {
