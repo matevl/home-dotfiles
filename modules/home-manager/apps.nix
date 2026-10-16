@@ -12,6 +12,7 @@
       editors = [
         "org.gnome.TextEditor.desktop"
         "code.desktop"
+        "codium.desktop"
         "Helix.desktop"
       ];
       images = [
@@ -20,7 +21,7 @@
       ];
       videos = [
         "vlc.desktop"
-        "org.gnome.Totem.desktop"
+        "org.gnome.Showtime.desktop"
       ];
       browser = [ "brave-browser.desktop" ];
 
