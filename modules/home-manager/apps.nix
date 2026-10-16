@@ -12,14 +12,14 @@
       editors = [
         "org.gnome.TextEditor.desktop"
         "code.desktop"
-        "hx.desktop"
+        "Helix.desktop"
       ];
       images = [
         "org.gnome.Loupe.desktop"
         "org.gnome.eog.desktop"
       ];
       videos = [
-        "org.videolan.VLC.desktop"
+        "vlc.desktop"
         "org.gnome.Totem.desktop"
       ];
       browser = [ "brave-browser.desktop" ];
@@ -35,40 +35,28 @@
         # Config files
         "application/json"
         "application/xml"
-        "text/xml"
-        "application/x-yaml"
-        "text/x-yaml"
+        "application/yaml"
         "application/toml"
-        "text/x-toml"
 
         # Scripts files
-        "application/x-sh"
-        "text/x-shellscript"
-        "application/x-nix"
-        "text/x-nix"
+        "application/x-shellscript"
 
         # Web
-        "application/javascript"
         "text/javascript"
-        "application/typescript"
-        "text/typescript"
         "text/css"
 
         # C/C++
-        "text/x-c"
         "text/x-csrc"
         "text/x-chdr"
-        "text/x-c++"
         "text/x-c++src"
         "text/x-c++hdr"
 
         # other
         "text/x-java"
         "text/rust"
-        "text/x-rust"
         "text/x-go"
         "text/x-python"
-        "application/x-python-code"
+        "text/x-python3"
       ];
 
       imageTypes = [
@@ -80,7 +68,7 @@
         "image/tiff"
         "image/svg+xml"
         "image/avif"
-        "image/heic"
+        "image/heif"
       ];
 
       videoTypes = [
@@ -88,13 +76,12 @@
         "video/x-matroska"
         "video/webm"
         "video/quicktime"
-        "video/x-msvideo"
+        "video/vnd.avi"
         "video/x-ms-wmv"
         "video/mpeg"
         "video/ogg"
         "video/3gpp"
         "video/3gpp2"
-        "video/mkv"
       ];
 
       browserTypes = [
