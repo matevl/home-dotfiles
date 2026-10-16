@@ -101,6 +101,8 @@
     curl
     networkmanagerapplet
     bluez
+    ldmtool
+    ntfs3g
   ];
 
   # Programs
@@ -118,5 +120,16 @@
   systemd.oomd = {
     enable = true;
     enableUserSlices = true;
+  };
+
+  systemd.services.ldmtool = {
+    description = "Scan and map Windows LDM dynamic volumes";
+    wantedBy = [ "multi-user.target" ];
+    before = [ "local-fs.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.ldmtool}/bin/ldmtool create all";
+      RemainAfterExit = true;
+    };
   };
 }
