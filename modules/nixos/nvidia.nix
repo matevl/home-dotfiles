@@ -10,13 +10,17 @@
 
     hardware.nvidia = {
       modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
+
+      powerManagement.enable = true;
 
       open = true;
 
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
+
+    boot.kernelParams = [
+      "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    ];
   };
 }
