@@ -24,13 +24,6 @@ in
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
     };
-    "org/gnome/desktop/background" = {
-      picture-uri = "file:///${wallpaper}";
-      picture-uri-dark = "file:///${wallpaper}";
-    };
-    "org/gnome/desktop/screensaver" = {
-      picture-uri = "file:///${lockWallpaper}";
-    };
     "org/gnome/desktop/peripherals/touchpad" = {
       click-method = "areas";
     };

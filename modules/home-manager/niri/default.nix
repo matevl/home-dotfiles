@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  xdg.configFile."niri/config.kdl".source = ./config.kdl;
-  xdg.configFile."niri/config.kdl".force = true;
+  xdg.configFile = {
+    "niri/config.kdl".source = ./config.kdl;
+    "niri/config.kdl".force = true;
+  };
 }
