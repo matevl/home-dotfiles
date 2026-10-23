@@ -95,12 +95,6 @@
       enable = true;
       configFile = {
         "mimeapps.list".force = true;
-        "DankMaterialShell/settings.json".text = builtins.toJSON {
-          wallpaper = osConfig.mySettings.wallpaper;
-          background.type = "image";
-          background.mode = "fill";
-          session.lock.enable = false;
-        };
       };
       dataFile."applications/mimeapps.list".force = true;
 
@@ -117,25 +111,23 @@
       };
     };
 
-  # Chromium / Brave
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave;
-    #commandLineArgs = [ "--disable-features=WaylandPerSurfaceScale" ];
-  };
-
-  # Kitty Terminal
-  programs.kitty = {
-    enable = true;
-    settings = {
-      confirm_os_window_close = 0;
-      background_opacity = "0.8";
+  programs = {
+    chromium = {
+      enable = true;
+      package = pkgs.brave;
     };
-  };
 
-  # Obsidian
-  programs.obsidian = {
-    enable = true;
-    package = pkgs-unstable.obsidian;
+    kitty = {
+      enable = true;
+      settings = {
+        confirm_os_window_close = 0;
+        background_opacity = "0.8";
+      };
+    };
+
+    obsidian = {
+      enable = true;
+      package = pkgs-unstable.obsidian;
+    };
   };
 }
