@@ -37,7 +37,7 @@
 
   environment = {
     systemPackages = [
-      pkgs.unstable.dms-shell
+      pkgs.unstable.dux-shell
       pkgs.unstable.quickshell
     ];
 

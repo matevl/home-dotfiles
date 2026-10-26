@@ -4,7 +4,7 @@ This repository contains my personal **NixOS 26.05** configuration, managed with
 
 ## Desktop Environments
 
-This config uses **Niri** as the main compositor, with **Quickshell** and **DMS** as the desktop layer. **GNOME** is kept as a backup desktop, and GDM handles login.
+This config uses **Niri** as the main compositor, with **Quickshell** and **Dux-Shell** as the desktop layer. **GNOME** is kept as a backup desktop, and GDM handles login.
 
 ## Included Tools
 
