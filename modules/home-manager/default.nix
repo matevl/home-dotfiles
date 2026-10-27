@@ -9,7 +9,6 @@
     ./services.nix
     ./gnome
     ./helix
-    ./hypr/hyprlock.nix
     ./hypr/hypridle.nix
     ./niri
     ./zsh

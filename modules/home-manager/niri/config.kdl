@@ -31,13 +31,7 @@ layout {
     }
 }
 
-window-rule {
-    match app-id="kitty"
-    draw-border-with-background false
-}
-
 spawn-at-startup "dms" "run"
-spawn-at-startup "dms" "ipc" "wallpaper" "set" "~/home-dotfiles/wallpapers/main_wallpaper.png"
 spawn-at-startup "xwayland-satellite"
 
 binds {
