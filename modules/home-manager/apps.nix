@@ -2,6 +2,7 @@
   pkgs,
   pkgs-unstable,
   osConfig,
+  lib,
   ...
 }:
 
@@ -93,21 +94,16 @@
     in
     {
       enable = true;
-      configFile = {
-        "mimeapps.list".force = true;
-      };
-      dataFile."applications/mimeapps.list".force = true;
-
       mimeApps = {
         enable = true;
         defaultApplications = {
           "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
           "application/pdf" = browser;
         }
-        // (pkgs.lib.genAttrs textTypes (_: editors))
-        // (pkgs.lib.genAttrs imageTypes (_: images))
-        // (pkgs.lib.genAttrs videoTypes (_: videos))
-        // (pkgs.lib.genAttrs browserTypes (_: browser));
+        // (lib.genAttrs textTypes (_: editors))
+        // (lib.genAttrs imageTypes (_: images))
+        // (lib.genAttrs videoTypes (_: videos))
+        // (lib.genAttrs browserTypes (_: browser));
       };
     };
 

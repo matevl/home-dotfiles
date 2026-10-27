@@ -83,7 +83,7 @@ in
 
     # Git tools
     pre-commit
-    gitg
+    github-desktop
     lazygit
 
     # --- Windows managers tools ---
@@ -95,5 +95,8 @@ in
     # --- Multimedia controls ---
     brightnessctl
     pavucontrol
+
+    # --- App utils ---
+    desktop-file-utils
   ];
 }

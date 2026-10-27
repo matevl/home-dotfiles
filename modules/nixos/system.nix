@@ -84,6 +84,8 @@
       HandleLidSwitch = "suspend";
       HandleLidSwitchExternalPower = "suspend";
     };
+
+    flatpak.enable = true;
   };
 
   # Security
