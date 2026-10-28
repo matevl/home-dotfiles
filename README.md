@@ -22,5 +22,5 @@ The user environment includes **VS Code**, **Helix**, **zsh**, **Kitty**, **Brav
 Apply the configuration on the laptop with:
 
 ```bash
-sudo nixos-rebuild switch --flake .#laptop
+sudo nixos-rebuild switch --flake .#laptop --impures
 ```

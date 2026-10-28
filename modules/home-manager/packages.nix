@@ -38,6 +38,7 @@ in
     vlc
     resources
     pkgs-unstable.moonlight-qt
+    transmission_4-gtk
 
     # --- General tools ---
     btop
@@ -83,7 +84,7 @@ in
 
     # Git tools
     pre-commit
-    gitg
+    github-desktop
     lazygit
 
     # --- Windows managers tools ---
@@ -95,5 +96,8 @@ in
     # --- Multimedia controls ---
     brightnessctl
     pavucontrol
+
+    # --- App utils ---
+    desktop-file-utils
   ];
 }
