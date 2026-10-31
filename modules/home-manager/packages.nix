@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  pkgs-unstable,
   ...
 }:
 
@@ -66,18 +65,18 @@ in
     # --- Apps ---
     vesktop = {
       enable = true;
-      package = pkgs-unstable.vesktop;
+      package = pkgs.unstable.vesktop;
       vencord.useSystem = true;
     };
   };
 
   home.packages = with pkgs; [
     # --- Apps ---
-    (wrapElectron pkgs-unstable.deezer-desktop)
+    (wrapElectron pkgs.unstable.deezer-desktop)
     nautilus
     vlc
     resources
-    pkgs-unstable.moonlight-qt
+    pkgs.unstable.moonlight-qt
     transmission_4-gtk
 
     # --- General tools ---
@@ -110,10 +109,11 @@ in
     nixfmt-tree
     nixd
     nix-tree
+    deadnix
 
     # Game engines
-    pkgs-unstable.godot_4
-    pkgs-unstable.gdtoolkit_4
+    pkgs.unstable.godot_4
+    pkgs.unstable.gdtoolkit_4
 
     # Git tools
     pre-commit

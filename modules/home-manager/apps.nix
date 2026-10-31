@@ -1,7 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
-  osConfig,
   lib,
   ...
 }:
@@ -123,7 +121,7 @@
 
     obsidian = {
       enable = true;
-      package = pkgs-unstable.obsidian;
+      package = pkgs.unstable.obsidian;
     };
   };
 }

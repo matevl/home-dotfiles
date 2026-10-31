@@ -1,15 +1,15 @@
-{ pkgs-unstable, ... }:
+{ pkgs, ... }:
 
 {
   # VS Code
   programs.vscodium = {
     enable = true;
-    package = pkgs-unstable.vscodium.override {
+    package = pkgs.unstable.vscodium.override {
       commandLineArgs = "--disable-features=WaylandPerSurfaceScale";
     };
 
     profiles.default = {
-      extensions = with pkgs-unstable.vscode-extensions; [
+      extensions = with pkgs.unstable.vscode-extensions; [
         # --- Programming Languages ---
         # Rust
         rust-lang.rust-analyzer

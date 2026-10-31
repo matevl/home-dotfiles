@@ -22,11 +22,9 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
-      nixos-hardware,
       treefmt-nix,
       ...
     }@inputs:
@@ -40,12 +38,13 @@
       };
 
       overlays = [
-        (final: prev: {
+        (final: _: {
           unstable = import nixpkgs-unstable {
-            inherit system;
+            inherit (final.stdenv.hostPlatform) system;
             config.allowUnfree = true;
           };
         })
+
       ];
 
       mkHost =
@@ -60,13 +59,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                pkgs-unstable = import nixpkgs-unstable {
-                  inherit system;
-                  config.allowUnfree = true;
-                };
-              };
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.mat = import ./modules/home-manager;
             }
           ];
@@ -80,6 +73,7 @@
           pre-commit
           niri
           treefmtEval.config.build.wrapper
+          deadnix
         ];
       };
 

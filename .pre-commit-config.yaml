@@ -6,6 +6,12 @@ repos:
         entry: treefmt .
         language: system
         pass_filenames: false
+      
+      - id: deadnix
+        name: Check unused Nix code
+        entry: deadnix
+        language: system
+        pass_filenames: false
 
       - id: nix-flake-check
         name: Check Nix flake evaluation
