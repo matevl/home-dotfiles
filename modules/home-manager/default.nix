@@ -5,7 +5,6 @@
     ./packages.nix
     ./apps.nix
     ./vscode.nix
-    ./shell.nix
     ./services.nix
     ./gnome
     ./helix
