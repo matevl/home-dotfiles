@@ -5,6 +5,17 @@
     enable = true;
     defaultEditor = true;
 
+    extraPackages = with pkgs; [
+      nixd
+      python3Packages.python-lsp-server
+      rust-analyzer
+      clang-tools
+      netcat
+      lemminx
+      yaml-language-server
+      taplo
+    ];
+
     settings = {
       theme = "catppuccin_mocha";
 
@@ -86,34 +97,20 @@
       ];
 
       language-server = {
-        nixd = {
-          command = "${pkgs.nixd}/bin/nixd";
-        };
-        pylsp = {
-          command = "${pkgs.python3Packages.python-lsp-server}/bin/pylsp";
-        };
-        rust-analyzer = {
-          command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-        };
-        clangd = {
-          command = "${pkgs.clang-tools}/bin/clangd";
-        };
+        lemminx.command = "lemminx";
         godot = {
-          command = "${pkgs.netcat}/bin/nc";
+          command = "nc";
           args = [
             "127.0.0.1"
             "6005"
           ];
         };
-        lemminx = {
-          command = "${pkgs.lemminx}/bin/lemminx";
-        };
         yaml-language-server = {
-          command = "${pkgs.yaml-language-server}/bin/yaml-language-server";
+          command = "yaml-language-server";
           args = [ "--stdio" ];
         };
         taplo = {
-          command = "${pkgs.taplo}/bin/taplo";
+          command = "taplo";
           args = [
             "lsp"
             "stdio"

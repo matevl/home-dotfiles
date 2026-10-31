@@ -9,6 +9,7 @@
 
   networking.hostName = config.mySettings.hostName;
 
+  mySettings.stateVersion = "26.05";
   mySettings.game.enable = true;
   mySettings.nvidia.enable = true;
 }

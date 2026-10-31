@@ -4,9 +4,13 @@
   pkgs,
   ...
 }:
-
+let
+  cfg = config.mySettings.game;
+in
 {
-  config = lib.mkIf config.mySettings.game.enable {
+  options.mySettings.game.enable = lib.mkEnableOption "Steam, Proton and gaming optimizations";
+
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       steam-run
     ];

@@ -86,6 +86,8 @@
     };
 
     flatpak.enable = true;
+
+    zerotierone.enable = true;
   };
 
   # Security

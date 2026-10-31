@@ -1,4 +1,8 @@
-{ pkgs, pkgs-unstable, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 
 let
   wrapElectron =
@@ -30,25 +34,55 @@ let
   */
 in
 {
+  programs = {
+    # --- General tools ---
+    btop.enable = true;
+    lazygit.enable = true;
+
+    # --- Shell tools ---
+    fastfetch.enable = true;
+    bat.enable = true;
+    eza.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
+    # Python
+    uv.enable = true;
+    ruff.enable = true;
+
+    # NIX
+    nh = {
+      enable = true;
+      flake = "${config.home.homeDirectory}/home-dotfiles";
+    };
+    nix-search-tv = {
+      enable = true;
+      enableTelevisionIntegration = true;
+    };
+
+    # --- Apps ---
+    vesktop = {
+      enable = true;
+      package = pkgs.unstable.vesktop;
+      vencord.useSystem = true;
+    };
+  };
+
   home.packages = with pkgs; [
     # --- Apps ---
-    (wrapElectron pkgs-unstable.vesktop)
-    (wrapElectron pkgs-unstable.deezer-desktop)
+    (wrapElectron pkgs.unstable.deezer-desktop)
     nautilus
     vlc
     resources
-    pkgs-unstable.moonlight-qt
+    pkgs.unstable.moonlight-qt
     transmission_4-gtk
 
     # --- General tools ---
-    btop
-    zerotierone
     ngrok
 
     # --- Shell tools ---
-    fastfetch
-    eza
-    bat
     screen
     mutagen
 
@@ -66,8 +100,6 @@ in
 
     # Python
     python3
-    uv
-    ruff
 
     # JS/TS
     yarn
@@ -75,17 +107,17 @@ in
     # NIX
     nix
     nixfmt-tree
-    nh
     nixd
+    nix-tree
+    deadnix
 
     # Game engines
-    pkgs-unstable.godot_4
-    pkgs-unstable.gdtoolkit_4
+    pkgs.unstable.godot_4
+    pkgs.unstable.gdtoolkit_4
 
     # Git tools
     pre-commit
     github-desktop
-    lazygit
 
     # --- Windows managers tools ---
     nerd-fonts.jetbrains-mono

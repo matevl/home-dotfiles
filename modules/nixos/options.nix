@@ -26,7 +26,7 @@
     };
     stateVersion = lib.mkOption {
       type = lib.types.str;
-      default = "26.05";
+      description = "NixOS release this machine was first installed with. Never change it after install.";
     };
     wallpaper = lib.mkOption {
       type = lib.types.str;
@@ -35,20 +35,6 @@
     lockWallpaper = lib.mkOption {
       type = lib.types.str;
       default = "/home/mat/home-dotfiles/wallpapers/lock_wallpaper.png";
-    };
-    game = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable Steam, Proton, and gaming optimizations";
-      };
-    };
-    nvidia = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable Nvidia proprietary drivers and hardware acceleration";
-      };
     };
   };
 }

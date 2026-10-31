@@ -1,11 +1,15 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
+let
+  cfg = config.mySettings.nvidia;
+in
 {
-  config = lib.mkIf config.mySettings.nvidia.enable {
+  options.mySettings.nvidia.enable = lib.mkEnableOption "Nvidia proprietary drivers and hardware acceleration";
+
+  config = lib.mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.nvidia = {

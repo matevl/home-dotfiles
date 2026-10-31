@@ -1,14 +1,7 @@
 {
-  config,
   pkgs,
-  osConfig,
   ...
 }:
-
-let
-  wallpaper = osConfig.mySettings.wallpaper;
-  lockWallpaper = osConfig.mySettings.lockWallpaper;
-in
 {
   # Theme consistency (GNOME files/Nautilus will look good)
   gtk = {

@@ -1,11 +1,10 @@
-{ osConfig, inputs, ... }:
+{ osConfig, ... }:
 
 {
   imports = [
     ./packages.nix
     ./apps.nix
     ./vscode.nix
-    ./shell.nix
     ./services.nix
     ./gnome
     ./helix
@@ -14,12 +13,5 @@
     ./zsh
   ];
 
-  home = {
-    # --- User info ---
-    username = osConfig.mySettings.username;
-    homeDirectory = "/home/${osConfig.mySettings.username}";
-    stateVersion = osConfig.mySettings.stateVersion;
-  };
-
-  programs.home-manager.enable = true;
+  home.stateVersion = osConfig.mySettings.stateVersion;
 }
