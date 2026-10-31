@@ -26,7 +26,7 @@
     };
     stateVersion = lib.mkOption {
       type = lib.types.str;
-      default = "26.05";
+      description = "NixOS release this machine was first installed with. Never change it after install.";
     };
     wallpaper = lib.mkOption {
       type = lib.types.str;
