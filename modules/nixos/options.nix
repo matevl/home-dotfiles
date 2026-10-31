@@ -36,19 +36,5 @@
       type = lib.types.str;
       default = "/home/mat/home-dotfiles/wallpapers/lock_wallpaper.png";
     };
-    game = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable Steam, Proton, and gaming optimizations";
-      };
-    };
-    nvidia = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable Nvidia proprietary drivers and hardware acceleration";
-      };
-    };
   };
 }
