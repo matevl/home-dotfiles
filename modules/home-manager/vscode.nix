@@ -4,9 +4,7 @@
   # VS Code
   programs.vscodium = {
     enable = true;
-    package = pkgs.unstable.vscodium.override {
-      commandLineArgs = "--disable-features=WaylandPerSurfaceScale";
-    };
+    package = pkgs.unstable.vscodium;
 
     profiles.default = {
       extensions = with pkgs.unstable.vscode-extensions; [
