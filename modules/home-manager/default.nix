@@ -3,12 +3,13 @@
 {
   imports = [
     ./packages.nix
-    ./apps.nix
-    ./vscode.nix
+    ./programs.nix
     ./services.nix
+    ./vscode.nix
+    ./xdg.nix
     ./gnome
     ./helix
-    ./hypr/hypridle.nix
+    ./hypr
     ./niri
     ./zsh
   ];

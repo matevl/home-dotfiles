@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
-
+{ lib, ... }:
 {
   xdg =
     let
@@ -104,24 +99,4 @@
         // (lib.genAttrs browserTypes (_: browser));
       };
     };
-
-  programs = {
-    chromium = {
-      enable = true;
-      package = pkgs.brave;
-    };
-
-    kitty = {
-      enable = true;
-      settings = {
-        confirm_os_window_close = 0;
-        background_opacity = "0.8";
-      };
-    };
-
-    obsidian = {
-      enable = true;
-      package = pkgs.unstable.obsidian;
-    };
-  };
 }
