@@ -2,16 +2,16 @@
 
 {
   imports = [
+    ./gnome.nix
+    ./helix.nix
+    ./hypr.nix
     ./packages.nix
     ./programs.nix
     ./services.nix
     ./vscode.nix
     ./xdg.nix
-    ./gnome
-    ./helix
-    ./hypr
+    ./zsh.nix
     ./niri
-    ./zsh
   ];
 
   home.stateVersion = osConfig.mySettings.stateVersion;
