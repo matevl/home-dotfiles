@@ -98,7 +98,6 @@
     wget
     curl
     networkmanagerapplet
-    bluez
     ldmtool
     ntfs3g
   ];
