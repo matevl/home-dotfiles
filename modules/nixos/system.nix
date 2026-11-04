@@ -99,7 +99,6 @@
     curl
     networkmanagerapplet
     ldmtool
-    ntfs3g
   ];
 
   # Programs

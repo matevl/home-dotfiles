@@ -31,7 +31,6 @@
     };
 
     blueman.enable = true;
-
   };
   programs.niri.enable = true;
 
