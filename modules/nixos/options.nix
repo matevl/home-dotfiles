@@ -28,13 +28,5 @@
       type = lib.types.str;
       description = "NixOS release this machine was first installed with. Never change it after install.";
     };
-    wallpaper = lib.mkOption {
-      type = lib.types.str;
-      default = "/home/mat/home-dotfiles/wallpapers/main_wallpaper.png";
-    };
-    lockWallpaper = lib.mkOption {
-      type = lib.types.str;
-      default = "/home/mat/home-dotfiles/wallpapers/lock_wallpaper.png";
-    };
   };
 }

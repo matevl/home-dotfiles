@@ -15,7 +15,6 @@ The user environment includes **VS Code**, **Helix**, **zsh**, **Kitty**, **Brav
 - `hosts/`: host-specific NixOS configuration.
 - `modules/nixos/`: system-level configuration.
 - `modules/home-manager/`: user environment and application settings.
-- `wallpapers/`: wallpapers used by the desktop setup.
 
 ## Usage
 
