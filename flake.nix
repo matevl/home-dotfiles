@@ -1,9 +1,6 @@
 {
   description = "Mat's NixOS 26.05 Config";
 
-  # To update
-  # sudo nixos-rebuild switch --flake .#name
-
   inputs = {
     # nixpkgs version (26.05)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
@@ -34,7 +31,6 @@
       treefmtEval = treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
         programs.nixfmt.enable = true;
-        programs.nixfmt.package = pkgs.nixfmt;
       };
 
       overlays = [
@@ -44,7 +40,6 @@
             config.allowUnfree = true;
           };
         })
-
       ];
 
       mkHost =
@@ -53,7 +48,10 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            { nixpkgs.overlays = overlays; }
+            {
+              nixpkgs.overlays = overlays;
+              nixpkgs.config.allowUnfree = true;
+            }
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
             {

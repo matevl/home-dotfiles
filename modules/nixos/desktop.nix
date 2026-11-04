@@ -4,7 +4,6 @@
   services = {
     xserver = {
       enable = true;
-      # -- X11 / Wayland --
       xkb = {
         layout = config.mySettings.keyboardLayout;
         variant = "";
@@ -31,7 +30,6 @@
     };
 
     blueman.enable = true;
-
   };
   programs.niri.enable = true;
 
@@ -45,8 +43,8 @@
     gnome.excludePackages = with pkgs; [
       gnome-tour
       gnome-console
-      epiphany # Web browser
-      geary # Mail client
+      epiphany
+      geary
       gnome-music
       gnome-calendar
       gnome-contacts

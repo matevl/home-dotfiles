@@ -17,11 +17,6 @@
     kernelModules = [ "dm_mod" ];
   };
 
-  # Nixpkgs configuration
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-
   # Nix configuration
   nix = {
     # GC options
@@ -103,9 +98,7 @@
     wget
     curl
     networkmanagerapplet
-    bluez
     ldmtool
-    ntfs3g
   ];
 
   # Programs
