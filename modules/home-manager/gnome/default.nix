@@ -3,7 +3,7 @@
   ...
 }:
 {
-  # Theme consistency (GNOME files/Nautilus will look good)
+  # Theme consistency
   gtk = {
     enable = true;
     theme = {
