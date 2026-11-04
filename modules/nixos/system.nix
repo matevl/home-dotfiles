@@ -17,11 +17,6 @@
     kernelModules = [ "dm_mod" ];
   };
 
-  # Nixpkgs configuration
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-
   # Nix configuration
   nix = {
     # GC options

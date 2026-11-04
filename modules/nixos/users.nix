@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Allow proprietary software
-  nixpkgs.config.allowUnfree = true;
-
   # Enable Zsh at system level
   programs.zsh.enable = true;
 
