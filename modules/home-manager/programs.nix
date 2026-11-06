@@ -30,11 +30,6 @@
     };
 
     # --- Apps ---
-    chromium = {
-      enable = true;
-      package = pkgs.brave;
-    };
-
     kitty = {
       enable = true;
       settings = {
