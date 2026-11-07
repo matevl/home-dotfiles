@@ -44,8 +44,10 @@
 
     vesktop = {
       enable = true;
-      package = pkgs.unstable.vesktop;
-      vencord.useSystem = true;
+      package = pkgs.unstable.vesktop.override {
+        withSystemVencord = true;
+        vencord = pkgs.unstable.vencord;
+      };
     };
   };
 }
