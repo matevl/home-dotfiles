@@ -55,10 +55,13 @@
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.mat = import ./modules/home-manager;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
+                users.mat = import ./modules/home-manager;
+                backupFileExtension = "backup";
+              };
             }
           ];
         };

@@ -17,7 +17,7 @@
         "vlc.desktop"
         "org.gnome.Showtime.desktop"
       ];
-      browser = [ "brave-browser.desktop" ];
+      browser = [ "firefox.desktop" ];
 
       # Text Types
       textTypes = [

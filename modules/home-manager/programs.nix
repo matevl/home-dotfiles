@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 {
   programs = {
-    # --- General tools ---
-    btop.enable = true;
-    lazygit.enable = true;
-
     # --- Shell tools ---
     fastfetch.enable = true;
     bat.enable = true;
@@ -13,6 +9,9 @@
       enable = true;
       nix-direnv.enable = true;
     };
+    btop.enable = true;
+    lazygit.enable = true;
+    screen.enable = true;
 
     # Python
     uv.enable = true;

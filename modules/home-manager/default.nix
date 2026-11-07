@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./firefox.nix
     ./gnome.nix
     ./helix.nix
     ./hypr.nix
