@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 {
   programs = {
-    # --- General tools ---
-    btop.enable = true;
-    lazygit.enable = true;
-
     # --- Shell tools ---
     fastfetch.enable = true;
     bat.enable = true;
@@ -13,6 +9,9 @@
       enable = true;
       nix-direnv.enable = true;
     };
+    btop.enable = true;
+    lazygit.enable = true;
+    screen.enable = true;
 
     # Python
     uv.enable = true;
@@ -30,11 +29,6 @@
     };
 
     # --- Apps ---
-    chromium = {
-      enable = true;
-      package = pkgs.brave;
-    };
-
     kitty = {
       enable = true;
       settings = {
@@ -50,8 +44,10 @@
 
     vesktop = {
       enable = true;
-      package = pkgs.unstable.vesktop;
-      vencord.useSystem = true;
+      package = pkgs.unstable.vesktop.override {
+        withSystemVencord = true;
+        vencord = pkgs.unstable.vencord;
+      };
     };
   };
 }

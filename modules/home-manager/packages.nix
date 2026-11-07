@@ -8,13 +8,11 @@
     resources
     pkgs.unstable.moonlight-qt
     transmission_4-gtk
-
-    # --- General tools ---
-    ngrok
+    bitwarden-desktop
 
     # --- Shell tools ---
-    screen
     mutagen
+    ngrok
 
     # --- Code tools ---
     # C/C++
