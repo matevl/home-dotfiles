@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    nixd
+    nixfmt
+  ];
   # VS Code
   programs.vscodium = {
     enable = true;
@@ -24,7 +28,7 @@
         geequlim.godot-tools
 
         # Nix
-        bbenoist.nix
+        jnoortheen.nix-ide
         mkhl.direnv
 
         # Java
@@ -154,8 +158,14 @@
 
         # --- Nix ---
         "[nix]" = {
-          "editor.defaultFormatter" = "bbenoist.nix";
+          "editor.defaultFormatter" = "jnoortheen.nix-ide";
           "editor.formatOnSave" = true;
+        };
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nixd";
+        "nix.formatterPath" = "nixfmt";
+        "nix.serverSettings".nixd = {
+          formatting.command = [ "nixfmt" ];
         };
 
         # --- GDScript ---
