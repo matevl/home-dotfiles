@@ -148,7 +148,6 @@
         "browser.search.suggest.enabled" = true;
         "browser.urlbar.suggest.searches" = true;
         "browser.urlbar.quicksuggest.enabled" = false;
-        "browser.urlbar.showSearchSuggestionsFirst" = true;
         "browser.urlbar.autocomplete.enabled" = true;
 
         "layout.css.prefers-color-scheme.content-override" = 0;
