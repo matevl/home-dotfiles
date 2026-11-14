@@ -38,5 +38,14 @@ in
       gamemode.enable = true;
       gamescope.enable = true;
     };
+
+    services.sunshine = {
+      enable = true;
+      autoStart = true;
+      capSysAdmin = true;
+      openFirewall = true;
+    };
+
+    users.users.${config.mySettings.username}.extraGroups = [ "uinput" ];
   };
 }

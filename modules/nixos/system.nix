@@ -80,6 +80,13 @@
     flatpak.enable = true;
 
     zerotierone.enable = true;
+
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      nssmdns6 = true;
+      openFirewall = true;
+    };
   };
 
   # Security
@@ -112,32 +119,35 @@
   };
 
   system.stateVersion = config.mySettings.stateVersion;
-  # -- RAM / OOM Optimizations --
-  systemd.oomd = {
-    enable = true;
-    enableUserSlices = true;
-  };
 
-  systemd.services.ldmtool = {
-    description = "Scan and map Windows LDM dynamic volumes";
-    wantedBy = [ "sysinit.target" ];
-    unitConfig.DefaultDependencies = false;
-    wants = [ "systemd-udev-settle.service" ];
-    after = [
-      "systemd-udevd.service"
-      "systemd-udev-trigger.service"
-      "systemd-udev-settle.service"
-      "systemd-modules-load.service"
-    ];
-    before = [
-      "local-fs-pre.target"
-      "shutdown.target"
-    ];
-    conflicts = [ "shutdown.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.ldmtool}/bin/ldmtool create all";
-      RemainAfterExit = true;
+  systemd = {
+    # -- RAM / OOM Optimizations --
+    oomd = {
+      enable = true;
+      enableUserSlices = true;
+    };
+
+    services.ldmtool = {
+      description = "Scan and map Windows LDM dynamic volumes";
+      wantedBy = [ "sysinit.target" ];
+      unitConfig.DefaultDependencies = false;
+      wants = [ "systemd-udev-settle.service" ];
+      after = [
+        "systemd-udevd.service"
+        "systemd-udev-trigger.service"
+        "systemd-udev-settle.service"
+        "systemd-modules-load.service"
+      ];
+      before = [
+        "local-fs-pre.target"
+        "shutdown.target"
+      ];
+      conflicts = [ "shutdown.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.ldmtool}/bin/ldmtool create all";
+        RemainAfterExit = true;
+      };
     };
   };
 }

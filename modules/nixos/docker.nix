@@ -18,5 +18,6 @@
     };
   };
 
+  users.users.${config.mySettings.username}.extraGroups = [ "docker" ];
   hardware.nvidia-container-toolkit.enable = config.mySettings.nvidia.enable;
 }
