@@ -3,6 +3,7 @@
 {
   imports = [
     ./firefox.nix
+    ./game.nix
     ./gnome.nix
     ./helix.nix
     ./hypr.nix
