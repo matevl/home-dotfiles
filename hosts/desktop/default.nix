@@ -12,5 +12,8 @@
 
   mySettings.stateVersion = "26.05";
   mySettings.game.enable = true;
-  mySettings.nvidia.enable = true;
+  mySettings.nvidia = {
+    enable = true;
+    modern.enable = true;
+  };
 }
