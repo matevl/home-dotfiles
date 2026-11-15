@@ -9,6 +9,5 @@
     ./docker.nix
     ./game.nix
     ./nvidia.nix
-    ../../hardware-configuration.nix
   ];
 }

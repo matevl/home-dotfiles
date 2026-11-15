@@ -15,7 +15,7 @@ repos:
 
       - id: nix-flake-check
         name: Check Nix flake evaluation
-        entry: nix flake check --no-build --impure
+        entry: nix flake check --no-build
         language: system
         pass_filenames: false
 
