@@ -1,0 +1,72 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.mySettings.desktopEnvironment;
+in
+{
+  options.mySettings.desktopEnvironment.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
+    description = "DE/WM";
+  };
+
+  config = lib.mkIf cfg.enable {
+    services = {
+      xserver = {
+        enable = true;
+        xkb = {
+          layout = config.mySettings.keyboardLayout;
+          variant = "";
+        };
+      };
+
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        pulse.enable = true;
+        wireplumber = {
+          enable = true;
+          extraConfig = {
+            "10-bluetooth-policy" = {
+              "wireplumber.settings" = {
+                "bluetooth.autoswitch-to-headset-profile" = false;
+              };
+            };
+          };
+        };
+      };
+
+      blueman.enable = true;
+    };
+    programs.niri.enable = true;
+
+    environment = {
+      systemPackages = [
+        pkgs.unstable.dux-shell
+        pkgs.unstable.quickshell
+      ];
+
+      # Disable unnecessary default GNOME applications
+      gnome.excludePackages = with pkgs; [
+        gnome-tour
+        gnome-console
+        epiphany
+        geary
+        gnome-music
+        gnome-calendar
+        gnome-contacts
+        gnome-maps
+        gnome-weather
+      ];
+
+      sessionVariables.NIXOS_OZONE_WL = "1";
+    };
+  };
+}

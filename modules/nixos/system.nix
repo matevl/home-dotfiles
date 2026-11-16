@@ -77,7 +77,7 @@
       HandleLidSwitchExternalPower = "suspend";
     };
 
-    flatpak.enable = true;
+    flatpak.enable = config.mySettings.desktopEnvironment.enable;
 
     zerotierone.enable = true;
 
