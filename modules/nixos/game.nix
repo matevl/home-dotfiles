@@ -8,7 +8,10 @@ let
   cfg = config.myNixosSettings.game;
 in
 {
-  options.myNixosSettings.game.enable = lib.mkEnableOption "Steam, Proton and gaming optimizations";
+  options.myNixosSettings.game = {
+    enable = lib.mkEnableOption "Steam, Proton and gaming optimizations";
+    remote.enable = lib.mkEnableOption "Active remote control like sunshine";
+  };
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
@@ -39,7 +42,7 @@ in
       gamescope.enable = true;
     };
 
-    services.sunshine = {
+    services.sunshine = lib.mkIf cfg.remote.enable {
       enable = true;
       autoStart = true;
       capSysAdmin = true;
