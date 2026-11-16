@@ -1,0 +1,56 @@
+{ ... }:
+
+{
+  programs = {
+    btop.enable = true;
+    eza.enable = true;
+    fastfetch.enable = true;
+
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "sudo"
+          "docker"
+        ];
+      };
+
+      initContent = ''
+        setopt HIST_IGNORE_SPACE
+        export NIXPKGS_ALLOW_UNFREE=1
+        fastfetch
+      '';
+
+      shellAliases = {
+        claer = "clear";
+
+        # Tools
+        top = "btop";
+        fetch = "fastfetch";
+        ls = "eza --group-directories-first";
+        tree = "eza --group-directories-first --tree";
+        vim = "hx";
+
+        clean-nixos = "sudo nix-collect-garbage -d";
+      };
+    };
+
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = {
+        add_newline = true;
+        character = {
+          success_symbol = "[➜](bold green)";
+          error_symbol = "[➜](bold red)";
+        };
+      };
+    };
+  };
+}

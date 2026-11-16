@@ -10,41 +10,11 @@
     transmission_4-gtk
     bitwarden-desktop
 
-    # --- Shell tools ---
-    mutagen
-    ngrok
-
-    # --- Code tools ---
-    # C/C++
-    gnumake
-    cmake
-    clang-tools
-
-    # Rust
-    rustc
-    cargo
-    rustfmt
-    clippy
-
-    # Python
-    python3
-
-    # JS/TS
-    yarn
-
-    # NIX
-    nix
-    nixfmt-tree
-    nixd
-    nix-tree
-    deadnix
-
     # Game engines
     pkgs.unstable.godot_4
     pkgs.unstable.gdtoolkit_4
 
     # Git tools
-    pre-commit
     github-desktop
 
     # --- Windows managers tools ---

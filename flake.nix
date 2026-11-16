@@ -43,7 +43,10 @@
       ];
 
       mkHost =
-        hostname:
+        {
+          hostname,
+          profile ? ./modules/home-manager/workstation,
+        }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -54,15 +57,18 @@
             }
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.mat = import ./modules/home-manager;
-                backupFileExtension = "backup";
-              };
-            }
+            (
+              { config, ... }:
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs; };
+                  users.${config.myNixosSettings.username} = import profile;
+                  backupFileExtension = "backup";
+                };
+              }
+            )
           ];
         };
     in
@@ -79,8 +85,8 @@
       };
 
       nixosConfigurations = {
-        laptop = mkHost "laptop";
-        desktop = mkHost "desktop";
+        laptop = mkHost { hostname = "laptop"; };
+        desktop = mkHost { hostname = "desktop"; };
       };
     };
 }

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf osConfig.mySettings.game.enable {
+  config = lib.mkIf osConfig.myNixosSettings.game.enable {
     programs = {
       prismlauncher = {
         enable = true;

@@ -13,11 +13,11 @@
     };
 
     daemon.settings = {
-      features.cdi = config.mySettings.nvidia.enable;
+      features.cdi = config.myNixosSettings.nvidia.enable;
       log-driver = "local";
     };
   };
 
-  users.users.${config.mySettings.username}.extraGroups = [ "docker" ];
-  hardware.nvidia-container-toolkit.enable = config.mySettings.nvidia.enable;
+  users.users.${config.myNixosSettings.username}.extraGroups = [ "docker" ];
+  hardware.nvidia-container-toolkit.enable = config.myNixosSettings.nvidia.enable;
 }

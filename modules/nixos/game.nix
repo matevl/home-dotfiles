@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.mySettings.game;
+  cfg = config.myNixosSettings.game;
 in
 {
-  options.mySettings.game.enable = lib.mkEnableOption "Steam, Proton and gaming optimizations";
+  options.myNixosSettings.game.enable = lib.mkEnableOption "Steam, Proton and gaming optimizations";
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
@@ -46,6 +46,6 @@ in
       openFirewall = true;
     };
 
-    users.users.${config.mySettings.username}.extraGroups = [ "uinput" ];
+    users.users.${config.myNixosSettings.username}.extraGroups = [ "uinput" ];
   };
 }

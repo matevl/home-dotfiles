@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  options.mySettings = {
+  options.myNixosSettings = {
     username = lib.mkOption {
       type = lib.types.str;
       default = "mat";
