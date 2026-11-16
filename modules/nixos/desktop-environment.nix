@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.mySettings.desktopEnvironment;
+  cfg = config.myNixosSettings.desktopEnvironment;
 in
 {
-  options.mySettings.desktopEnvironment.enable = lib.mkOption {
+  options.myNixosSettings.desktopEnvironment.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     description = "DE/WM";
@@ -19,7 +19,7 @@ in
       xserver = {
         enable = true;
         xkb = {
-          layout = config.mySettings.keyboardLayout;
+          layout = config.myNixosSettings.keyboardLayout;
           variant = "";
         };
       };

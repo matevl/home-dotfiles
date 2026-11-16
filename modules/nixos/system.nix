@@ -56,9 +56,9 @@
   };
 
   # Time zone and Locale
-  time.timeZone = config.mySettings.timeZone;
-  i18n.defaultLocale = config.mySettings.defaultLocale;
-  console.keyMap = config.mySettings.keyboardLayout;
+  time.timeZone = config.myNixosSettings.timeZone;
+  i18n.defaultLocale = config.myNixosSettings.defaultLocale;
+  console.keyMap = config.myNixosSettings.keyboardLayout;
 
   # Swap
   zramSwap = {
@@ -77,7 +77,7 @@
       HandleLidSwitchExternalPower = "suspend";
     };
 
-    flatpak.enable = config.mySettings.desktopEnvironment.enable;
+    flatpak.enable = config.myNixosSettings.desktopEnvironment.enable;
 
     zerotierone.enable = true;
 
@@ -118,7 +118,7 @@
     ssh.package = pkgs.openssh_gssapi;
   };
 
-  system.stateVersion = config.mySettings.stateVersion;
+  system.stateVersion = config.myNixosSettings.stateVersion;
 
   systemd = {
     # -- RAM / OOM Optimizations --

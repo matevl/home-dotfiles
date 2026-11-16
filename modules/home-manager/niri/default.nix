@@ -1,8 +1,10 @@
-{ ... }:
+{ config, lib, ... }:
 
 {
-  xdg.configFile = {
-    "niri/config.kdl".source = ./config.kdl;
-    "niri/config.kdl".force = true;
+  config = lib.mkIf config.myHomeSettings.desktopEnvironmentConfig.enable {
+    xdg.configFile = {
+      "niri/config.kdl".source = ./config.kdl;
+      "niri/config.kdl".force = true;
+    };
   };
 }

@@ -4,10 +4,10 @@
   ...
 }:
 let
-  cfg = config.mySettings.nvidia;
+  cfg = config.myNixosSettings.nvidia;
 in
 {
-  options.mySettings.nvidia = {
+  options.myNixosSettings.nvidia = {
     enable = lib.mkEnableOption "Nvidia drivers and hardware acceleration";
     modern.enable = lib.mkEnableOption "open kernel modules and CUDA support for Turing (GTX 16xx / RTX 20xx) or newer GPUs";
   };

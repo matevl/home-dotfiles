@@ -1,4 +1,4 @@
-{ osConfig, ... }:
+{ config, ... }:
 
 {
   imports = [
@@ -7,6 +7,7 @@
     ./gnome.nix
     ./helix.nix
     ./hypr.nix
+    ./options.nix
     ./packages.nix
     ./programs.nix
     ./services.nix
@@ -16,5 +17,5 @@
     ./niri
   ];
 
-  home.stateVersion = osConfig.mySettings.stateVersion;
+  home.stateVersion = config.myHomeSettings.stateVersion;
 }
