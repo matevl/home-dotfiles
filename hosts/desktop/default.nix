@@ -11,7 +11,10 @@
   networking.hostName = config.myNixosSettings.hostName;
 
   myNixosSettings = {
-    game.enable = true;
+    game = {
+      enable = true;
+      remote.enable = true;
+    };
     nvidia = {
       enable = true;
       modern.enable = true;
