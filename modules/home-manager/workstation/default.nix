@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 {
   imports = [
@@ -14,6 +14,4 @@
     ../core
     ./niri
   ];
-
-  home.stateVersion = config.myHomeSettings.stateVersion;
 }
