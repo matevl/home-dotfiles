@@ -13,8 +13,6 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -22,16 +20,11 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
-      treefmt-nix,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      treefmtEval = treefmt-nix.lib.evalModule pkgs {
-        projectRootFile = "flake.nix";
-        programs.nixfmt.enable = true;
-      };
 
       overlays = [
         (final: _: {
@@ -73,13 +66,11 @@
         };
     in
     {
-      formatter.${system} = treefmtEval.config.build.wrapper;
-
       devShells.${system}.default = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [
           pre-commit
           niri
-          treefmtEval.config.build.wrapper
+          nixfmt-tree
           deadnix
         ];
       };
