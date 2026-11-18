@@ -19,7 +19,7 @@ in
       modesetting.enable = true;
       powerManagement.enable = true;
       open = cfg.modern.enable;
-      nvidiaSettings = true;
+      nvidiaSettings = config.myNixosSettings.desktopEnvironment.enable;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
