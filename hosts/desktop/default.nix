@@ -15,6 +15,7 @@
       enable = true;
       remote.enable = true;
     };
+    ldmtool.enable = true;
     nvidia = {
       enable = true;
       modern.enable = true;
