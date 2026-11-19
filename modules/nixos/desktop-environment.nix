@@ -15,7 +15,58 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    environment = {
+      systemPackages = [
+        pkgs.unstable.dux-shell
+        pkgs.unstable.quickshell
+      ];
+
+      # Disable unnecessary default GNOME applications
+      gnome.excludePackages = with pkgs; [
+        gnome-tour
+        gnome-console
+        epiphany
+        geary
+        gnome-music
+        gnome-calendar
+        gnome-contacts
+        gnome-maps
+        gnome-weather
+      ];
+
+      sessionVariables.NIXOS_OZONE_WL = "1";
+    };
+
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          ControllerMode = "dual";
+          Experimental = true;
+          FastConnectable = false;
+        };
+      };
+    };
+
+    programs.niri.enable = true;
+
+    # Security
+    security = {
+      polkit.enable = true;
+      pam.services.login.enableGnomeKeyring = true;
+    };
+
     services = {
+      gnome.gnome-keyring.enable = true;
+
+      logind.settings.Login = {
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchExternalPower = "suspend";
+      };
+
+      flatpak.enable = config.myNixosSettings.desktopEnvironment.enable;
+
       xserver = {
         enable = true;
         xkb = {
@@ -44,29 +95,6 @@ in
       };
 
       blueman.enable = true;
-    };
-    programs.niri.enable = true;
-
-    environment = {
-      systemPackages = [
-        pkgs.unstable.dux-shell
-        pkgs.unstable.quickshell
-      ];
-
-      # Disable unnecessary default GNOME applications
-      gnome.excludePackages = with pkgs; [
-        gnome-tour
-        gnome-console
-        epiphany
-        geary
-        gnome-music
-        gnome-calendar
-        gnome-contacts
-        gnome-maps
-        gnome-weather
-      ];
-
-      sessionVariables.NIXOS_OZONE_WL = "1";
     };
   };
 }

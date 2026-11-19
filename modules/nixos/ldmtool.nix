@@ -1,36 +1,6 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        ControllerMode = "dual";
-        Experimental = true;
-        FastConnectable = false;
-      };
-    };
-  };
-
-  # Services
-  services = {
-    gnome.gnome-keyring.enable = true;
-
-    logind.settings.Login = {
-      HandleLidSwitch = "suspend";
-      HandleLidSwitchExternalPower = "suspend";
-    };
-
-    flatpak.enable = config.myNixosSettings.desktopEnvironment.enable;
-  };
-
-  # Security
-  security = {
-    polkit.enable = true;
-    pam.services.login.enableGnomeKeyring = true;
-  };
-
   environment.systemPackages = with pkgs; [
     ldmtool
   ];
