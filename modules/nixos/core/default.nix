@@ -6,6 +6,7 @@
     ./nix.nix
     ./users.nix
     ./packages.nix
+    ../options.nix
   ];
 
   system.stateVersion = config.myNixosSettings.stateVersion;

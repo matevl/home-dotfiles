@@ -1,42 +1,15 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
   cfg = config.myNixosSettings.desktopEnvironment;
 in
 {
-  options.myNixosSettings.desktopEnvironment.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "DE/WM";
-  };
+  options.myNixosSettings.desktopEnvironment.enable = lib.mkEnableOption "DE/WM";
 
   config = lib.mkIf cfg.enable {
-    environment = {
-      systemPackages = [
-        pkgs.unstable.dux-shell
-        pkgs.unstable.quickshell
-      ];
-
-      # Disable unnecessary default GNOME applications
-      gnome.excludePackages = with pkgs; [
-        gnome-tour
-        gnome-console
-        epiphany
-        geary
-        gnome-music
-        gnome-calendar
-        gnome-contacts
-        gnome-maps
-        gnome-weather
-      ];
-
-      sessionVariables.NIXOS_OZONE_WL = "1";
-    };
-
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -48,8 +21,6 @@ in
         };
       };
     };
-
-    programs.niri.enable = true;
 
     # Security
     security = {
@@ -65,7 +36,7 @@ in
         HandleLidSwitchExternalPower = "suspend";
       };
 
-      flatpak.enable = config.myNixosSettings.desktopEnvironment.enable;
+      flatpak.enable = true;
 
       xserver = {
         enable = true;
@@ -76,7 +47,6 @@ in
       };
 
       displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
 
       pipewire = {
         enable = true;

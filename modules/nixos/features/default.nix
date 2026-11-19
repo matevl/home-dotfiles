@@ -1,13 +1,9 @@
-{ ... }:
-
-{
+{ ... }: {
   imports = [
-    ./options.nix
     ./desktop-environment.nix
     ./docker.nix
-    ./ldmtool.nix
     ./game.nix
+    ./ldmtool.nix
     ./nvidia.nix
-    ./core
   ];
 }
