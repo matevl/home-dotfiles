@@ -1,48 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Bootloader
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-
-    kernel.sysctl = {
-      "vm.swappiness" = 100;
-    };
-
-    supportedFilesystems = [ "ntfs" ];
-
-    kernelModules = [ "dm_mod" ];
-  };
-
-  # Nix configuration
-  nix = {
-    # GC options
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-
-    # Nix settings
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-
-      auto-optimise-store = true;
-      download-buffer-size = 536870912;
-      min-free = 10 * 1024 * 1024 * 1024;
-      max-free = 20 * 1024 * 1024 * 1024;
-    };
-  };
-
-  # Networking
-  networking.networkmanager.enable = true;
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -55,19 +13,6 @@
     };
   };
 
-  # Time zone and Locale
-  time.timeZone = config.myNixosSettings.timeZone;
-  i18n.defaultLocale = config.myNixosSettings.defaultLocale;
-  console.keyMap = config.myNixosSettings.keyboardLayout;
-
-  # Swap
-  zramSwap = {
-    enable = true;
-    priority = 1000;
-    algorithm = "zstd";
-    memoryPercent = 50;
-  };
-
   # Services
   services = {
     gnome.gnome-keyring.enable = true;
@@ -78,15 +23,6 @@
     };
 
     flatpak.enable = config.myNixosSettings.desktopEnvironment.enable;
-
-    zerotierone.enable = true;
-
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      nssmdns6 = true;
-      openFirewall = true;
-    };
   };
 
   # Security
@@ -95,38 +31,11 @@
     pam.services.login.enableGnomeKeyring = true;
   };
 
-  # System packages
   environment.systemPackages = with pkgs; [
-    git
-    gcc
-    man-pages
-    man-pages-posix
-    tree
-    wget
-    curl
-    networkmanagerapplet
     ldmtool
   ];
 
-  # Programs
-  programs = {
-    nix-ld.enable = true;
-    nix-ld.libraries = with pkgs; [
-      stdenv.cc.cc.lib
-    ];
-
-    ssh.package = pkgs.openssh_gssapi;
-  };
-
-  system.stateVersion = config.myNixosSettings.stateVersion;
-
   systemd = {
-    # -- RAM / OOM Optimizations --
-    oomd = {
-      enable = true;
-      enableUserSlices = true;
-    };
-
     services.ldmtool = {
       description = "Scan and map Windows LDM dynamic volumes";
       wantedBy = [ "sysinit.target" ];
