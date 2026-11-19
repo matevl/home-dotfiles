@@ -4,7 +4,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
-    ../../modules/nixos
+    ../../modules/nixos/nas
     ./hardware-configuration.nix
   ];
 
