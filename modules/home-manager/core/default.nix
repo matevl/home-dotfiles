@@ -5,7 +5,6 @@
     ../options.nix
     ./packages.nix
     ./programs.nix
-    ./services.nix
     ./zsh.nix
   ];
 
