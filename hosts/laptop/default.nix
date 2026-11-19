@@ -5,7 +5,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-laptop
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-    ../../modules/nixos
+    ../../modules/nixos/workstation
     ./hardware-configuration.nix
   ];
 

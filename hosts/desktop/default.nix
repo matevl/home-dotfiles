@@ -4,7 +4,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
-    ../../modules/nixos
+    ../../modules/nixos/workstation
     ./hardware-configuration.nix
   ];
 
@@ -15,6 +15,7 @@
       enable = true;
       remote.enable = true;
     };
+    ldmtool.enable = true;
     nvidia = {
       enable = true;
       modern.enable = true;
