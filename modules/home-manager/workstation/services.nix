@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   systemd.user.services.mutagen = {
@@ -14,4 +14,6 @@
       WantedBy = [ "default.target" ];
     };
   };
+
+  services.network-manager-applet.enable = config.myHomeSettings.desktopEnvironmentConfig.enable;
 }
