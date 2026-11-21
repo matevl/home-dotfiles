@@ -15,6 +15,7 @@
       enable = true;
       remote.enable = true;
     };
+    hostName = "desktop";
     ldmtool.enable = true;
     nvidia = {
       enable = true;

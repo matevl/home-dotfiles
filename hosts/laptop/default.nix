@@ -13,6 +13,7 @@
 
   myNixosSettings = {
     game.enable = true;
+    hostName = "laptop";
     stateVersion = "26.05";
   };
 

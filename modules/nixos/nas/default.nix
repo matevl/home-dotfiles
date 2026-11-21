@@ -5,5 +5,8 @@
     ./services.nix
   ];
 
-  config.myNixosSettings.jellyfin.enable = lib.mkDefault true;
+  config.myNixosSettings = {
+    jellyfin.enable = lib.mkDefault true;
+    zfs.enable = true;
+  };
 }

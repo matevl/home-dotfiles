@@ -11,6 +11,7 @@
   networking.hostName = config.myNixosSettings.hostName;
 
   myNixosSettings = {
+    hostName = "nas";
     username = "nas";
     nvidia = {
       enable = true;
