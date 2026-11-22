@@ -5,83 +5,6 @@
 }:
 {
   services = {
-    filebrowser = {
-      enable = lib.mkDefault true;
-      openFirewall = false;
-      settings = {
-        address = "0.0.0.0";
-        port = 8085;
-        root = "/srv/storage";
-      };
-    };
-
-    cockpit = {
-      enable = true;
-      openFirewall = true;
-      port = 9090;
-      settings = {
-        WebService = {
-          AllowUnencrypted = true;
-        };
-      };
-    };
-
-    # Dashboard
-    homepage-dashboard = {
-      enable = true;
-      openFirewall = false;
-      listenPort = 8082;
-      settings = {
-        title = "NAS Hub";
-        theme = "dark";
-      };
-      services = [
-        {
-          "Media & Files" = [
-            {
-              Jellyfin = {
-                icon = "jellyfin.png";
-                href = "http://jellyfin.nas";
-                description = "Movies & TV Shows";
-              };
-            }
-            {
-              FileBrowser = {
-                icon = "filebrowser.png";
-                href = "http://files.nas";
-                description = "Shared files & uploads";
-              };
-            }
-          ];
-        }
-        {
-          "Personal & Admin" = [
-            {
-              Trilium = {
-                icon = "trilium.png";
-                href = "http://trilium.nas";
-                description = "Knowledge base & notes";
-              };
-            }
-            {
-              Cockpit = {
-                icon = "cockpit.png";
-                href = "https://nas:9090";
-                description = "System & ZFS administration";
-              };
-            }
-            {
-              Dockge = {
-                icon = "dockge.png";
-                href = "http://dockge.nas";
-                description = "Docker Compose stacks manager";
-              };
-            }
-          ];
-        }
-      ];
-    };
-
     #Reverse Proxy
     caddy = {
       enable = true;
@@ -117,6 +40,10 @@
           '';
         };
 
+        "http://photos.nas" = {
+          extraConfig = "reverse_proxy localhost:2283";
+        };
+
         "http://jellyfin.nas" = {
           extraConfig = "reverse_proxy localhost:8096";
         };
@@ -125,6 +52,99 @@
           extraConfig = "reverse_proxy localhost:8080";
         };
       };
+    };
+
+    cockpit = {
+      enable = true;
+      openFirewall = true;
+      port = 9090;
+      settings = {
+        WebService = {
+          AllowUnencrypted = true;
+        };
+      };
+    };
+
+    filebrowser = {
+      enable = lib.mkDefault true;
+      openFirewall = false;
+      settings = {
+        address = "0.0.0.0";
+        port = 8085;
+        root = "/srv/storage";
+      };
+    };
+
+    # Dashboard
+    homepage-dashboard = {
+      enable = true;
+      openFirewall = false;
+      listenPort = 8082;
+      settings = {
+        title = "NAS Hub";
+        theme = "dark";
+      };
+      services = [
+        {
+          "Media & Files" = [
+            {
+              Jellyfin = {
+                icon = "jellyfin.png";
+                href = "http://jellyfin.nas";
+                description = "Movies & TV Shows";
+              };
+            }
+            {
+              FileBrowser = {
+                icon = "filebrowser.png";
+                href = "http://files.nas";
+                description = "Shared files & uploads";
+              };
+            }
+            {
+              Immich = {
+                icon = "immich.png";
+                href = "http://photos.nas";
+                description = "Photos & videos backup";
+              };
+            }
+            {
+              Trilium = {
+                icon = "trilium.png";
+                href = "http://trilium.nas";
+                description = "Knowledge base & notes";
+              };
+            }
+          ];
+        }
+        {
+          "Personal & Admin" = [
+            {
+              Cockpit = {
+                icon = "cockpit.png";
+                href = "https://nas:9090";
+                description = "System & ZFS administration";
+              };
+            }
+            {
+              Dockge = {
+                icon = "dockge.png";
+                href = "http://dockge.nas";
+                description = "Docker Compose stacks manager";
+              };
+            }
+          ];
+        }
+      ];
+    };
+
+    immich = {
+      enable = true;
+      host = "127.0.0.1";
+      port = 2283;
+      openFirewall = false;
+      mediaLocation = "/srv/storage/immich";
+      accelerationDevices = null;
     };
 
     trilium-server = {
@@ -199,5 +219,10 @@
     "d /srv/dockge/data 0755 root root -"
     "d /srv/stacks 0755 root root -"
     "f /etc/tinyauth.env 0600 root root -"
+    "d /srv/storage/immich 0750 immich immich -"
+  ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "immich-2.7.5"
   ];
 }
