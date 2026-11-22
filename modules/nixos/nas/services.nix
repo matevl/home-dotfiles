@@ -170,11 +170,11 @@ in
   ];
 
   systemd.tmpfiles.rules = [
-    "d /srv/storage 0775 root users -"
-    "d /srv/dockge/data 0755 root root -"
-    "d /srv/stacks 0755 root root -"
-    "f /etc/tinyauth.env 0600 root root -"
-    "d /srv/storage/immich 0750 immich immich -"
+    "d /srv/storage 0775 root users -" # Shared ZFS pool mountpoint
+    "d /srv/dockge/data 0755 root root -" # Dockge persistent data
+    "d /srv/stacks 0755 root root -" # Docker Compose stacks
+    "f /etc/tinyauth.env 0600 root root -" # Tinyauth secret and credentials
+    "d /srv/storage/immich 0750 immich immich -" # Immich media library
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
