@@ -51,6 +51,10 @@ in
           '';
         };
 
+        "http://git.nas" = {
+          extraConfig = "reverse_proxy localhost:${toString ports.forgejo}";
+        };
+
         "http://photos.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.immich}";
         };

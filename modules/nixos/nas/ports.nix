@@ -4,6 +4,8 @@
   cockpit = 9090;
   dockge = 5001;
   filebrowser = 8085;
+  forgejo = 3001;
+  forgejoSsh = 2222;
   homepage = 8082;
   immich = 2283;
   jellyfin = 8096;

@@ -29,6 +29,27 @@ in
       };
     };
 
+    forgejo = {
+      enable = true;
+      stateDir = "/srv/storage/forgejo";
+      database.type = "sqlite3";
+      lfs.enable = true;
+      settings = {
+        server = {
+          DOMAIN = "git.nas";
+          ROOT_URL = "http://git.nas/";
+          HTTP_ADDR = "127.0.0.1";
+          HTTP_PORT = ports.forgejo;
+          START_SSH_SERVER = true;
+          SSH_PORT = ports.forgejoSsh;
+          SSH_LISTEN_PORT = ports.forgejoSsh;
+        };
+        service = {
+          DISABLE_REGISTRATION = true; # Only admin-created accounts
+        };
+      };
+    };
+
     # Dashboard
     homepage-dashboard = {
       enable = true;
@@ -79,7 +100,7 @@ in
           ];
         }
         {
-          "Personal & Admin" = [
+          "Dev & Admin" = [
             {
               Cockpit = {
                 icon = "cockpit.png";
@@ -92,6 +113,13 @@ in
                 icon = "dockge.png";
                 href = "http://dockge.nas";
                 description = "Docker Compose stacks manager";
+              };
+            }
+            {
+              Forgejo = {
+                icon = "forgejo.png";
+                href = "http://git.nas";
+                description = "Self-hosted Git repositories";
               };
             }
           ];
@@ -199,6 +227,7 @@ in
     "f /etc/tinyauth.env 0600 root root -" # Tinyauth secret and credentials
     "d /srv/storage/immich 0750 immich immich -" # Immich media library
     "d /srv/storage/downloads 0775 transmission users -" # Transmission download folder
+    "d /srv/storage/forgejo 0750 forgejo forgejo -" # Forgejo Git repositories and data
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
