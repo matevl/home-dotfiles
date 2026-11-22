@@ -6,6 +6,7 @@
     ./jellyfin.nix
     ./ldmtool.nix
     ./nvidia.nix
+    ./tailscale.nix
     ./zfs.nix
   ];
 }
