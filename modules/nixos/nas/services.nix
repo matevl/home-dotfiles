@@ -182,6 +182,7 @@
   };
 
   environment.systemPackages = [
+    pkgs.cockpit-zfs
     (pkgs.writeScriptBin "tinyauth-setup" ''
       #!/bin/sh
       # Usage: sudo tinyauth-setup
