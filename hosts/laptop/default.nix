@@ -14,6 +14,7 @@
   myNixosSettings = {
     game.enable = true;
     hostName = "laptop";
+    tailscale.enable = true;
     stateVersion = "26.05";
   };
 

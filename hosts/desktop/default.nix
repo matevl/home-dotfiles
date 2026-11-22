@@ -21,6 +21,7 @@
       enable = true;
       modern.enable = true;
     };
+    tailscale.enable = true;
     stateVersion = "26.05";
   };
 
