@@ -2,6 +2,7 @@
   imports = [
     ../core
     ../features
+    ./networking.nix
     ./services.nix
   ];
 
