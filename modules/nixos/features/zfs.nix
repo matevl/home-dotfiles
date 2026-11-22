@@ -25,8 +25,13 @@ in
       }
     ];
 
-    boot.supportedFilesystems = [ "zfs" ];
-    boot.zfs.extraPools = cfg.pools;
+    boot = {
+      supportedFilesystems = [ "zfs" ];
+      zfs = {
+        extraPools = cfg.pools;
+        forceImportRoot = false;
+      };
+    };
 
     services.zfs = {
       autoScrub.enable = true;
