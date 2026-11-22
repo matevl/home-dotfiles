@@ -5,55 +5,6 @@
 }:
 {
   services = {
-    #Reverse Proxy
-    caddy = {
-      enable = true;
-      extraConfig = ''
-        (tinyauth) {
-          forward_auth localhost:3000 {
-            uri /api/auth/caddy
-          }
-        }
-      '';
-      virtualHosts = {
-        "http://auth.nas" = {
-          extraConfig = "reverse_proxy localhost:3000";
-        };
-        "http://nas" = {
-          extraConfig = ''
-            import tinyauth
-            reverse_proxy localhost:8082
-          '';
-        };
-
-        "http://files.nas" = {
-          extraConfig = ''
-            import tinyauth
-            reverse_proxy localhost:8085
-          '';
-        };
-
-        "http://dockge.nas" = {
-          extraConfig = ''
-            import tinyauth
-            reverse_proxy localhost:5001
-          '';
-        };
-
-        "http://photos.nas" = {
-          extraConfig = "reverse_proxy localhost:2283";
-        };
-
-        "http://jellyfin.nas" = {
-          extraConfig = "reverse_proxy localhost:8096";
-        };
-
-        "http://trilium.nas" = {
-          extraConfig = "reverse_proxy localhost:8080";
-        };
-      };
-    };
-
     cockpit = {
       enable = true;
       openFirewall = true;
