@@ -1,7 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  ports = import ./ports.nix;
+in
+{
   networking.firewall.allowedTCPPorts = [
-    80 # Caddy HTTP reverse proxy
-    443 # Caddy HTTPS reverse proxy
+    ports.caddyHttp
+    ports.caddyHttps
   ];
 
   services = {
@@ -10,46 +14,46 @@
       enable = true;
       extraConfig = ''
         (tinyauth) {
-          forward_auth localhost:3000 {
+          forward_auth localhost:${toString ports.tinyauth} {
             uri /api/auth/caddy
           }
         }
       '';
       virtualHosts = {
         "http://auth.nas" = {
-          extraConfig = "reverse_proxy localhost:3000";
+          extraConfig = "reverse_proxy localhost:${toString ports.tinyauth}";
         };
         "http://nas" = {
           extraConfig = ''
             import tinyauth
-            reverse_proxy localhost:8082
+            reverse_proxy localhost:${toString ports.homepage}
           '';
         };
 
         "http://files.nas" = {
           extraConfig = ''
             import tinyauth
-            reverse_proxy localhost:8085
+            reverse_proxy localhost:${toString ports.filebrowser}
           '';
         };
 
         "http://dockge.nas" = {
           extraConfig = ''
             import tinyauth
-            reverse_proxy localhost:5001
+            reverse_proxy localhost:${toString ports.dockge}
           '';
         };
 
         "http://photos.nas" = {
-          extraConfig = "reverse_proxy localhost:2283";
+          extraConfig = "reverse_proxy localhost:${toString ports.immich}";
         };
 
         "http://jellyfin.nas" = {
-          extraConfig = "reverse_proxy localhost:8096";
+          extraConfig = "reverse_proxy localhost:${toString ports.jellyfin}";
         };
 
         "http://trilium.nas" = {
-          extraConfig = "reverse_proxy localhost:8080";
+          extraConfig = "reverse_proxy localhost:${toString ports.trilium}";
         };
       };
     };

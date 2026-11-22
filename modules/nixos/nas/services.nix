@@ -3,12 +3,15 @@
   lib,
   ...
 }:
+let
+  ports = import ./ports.nix;
+in
 {
   services = {
     cockpit = {
       enable = true;
       openFirewall = true;
-      port = 9090;
+      port = ports.cockpit;
       settings = {
         WebService = {
           AllowUnencrypted = true;
@@ -21,7 +24,7 @@
       openFirewall = false;
       settings = {
         address = "0.0.0.0";
-        port = 8085;
+        port = ports.filebrowser;
         root = "/srv/storage";
       };
     };
@@ -30,7 +33,7 @@
     homepage-dashboard = {
       enable = true;
       openFirewall = false;
-      listenPort = 8082;
+      listenPort = ports.homepage;
       settings = {
         title = "NAS Hub";
         theme = "dark";
@@ -73,7 +76,7 @@
             {
               Cockpit = {
                 icon = "cockpit.png";
-                href = "https://nas:9090";
+                href = "https://nas:${toString ports.cockpit}";
                 description = "System & ZFS administration";
               };
             }
@@ -92,7 +95,7 @@
     immich = {
       enable = true;
       host = "127.0.0.1";
-      port = 2283;
+      port = ports.immich;
       openFirewall = false;
       mediaLocation = "/srv/storage/immich";
       accelerationDevices = null;
@@ -101,7 +104,7 @@
     trilium-server = {
       enable = lib.mkDefault true;
       host = "0.0.0.0";
-      port = 8080;
+      port = ports.trilium;
     };
   };
 
@@ -110,7 +113,7 @@
     containers = {
       dockge = {
         image = "louislam/dockge:1";
-        ports = [ "127.0.0.1:5001:5001" ];
+        ports = [ "127.0.0.1:${toString ports.dockge}:5001" ];
         volumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
           "/srv/dockge/data:/app/data"
@@ -122,7 +125,7 @@
       };
       tinyauth = {
         image = "ghcr.io/steveiliop56/tinyauth:v3";
-        ports = [ "127.0.0.1:3000:3000" ];
+        ports = [ "127.0.0.1:${toString ports.tinyauth}:3000" ];
         environment = {
           APP_URL = "http://auth.nas";
           COOKIE_SECURE = "false";
