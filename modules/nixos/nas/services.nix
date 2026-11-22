@@ -1,5 +1,5 @@
 {
-  config,
+  pkgs,
   lib,
   ...
 }:
@@ -160,6 +160,39 @@
       };
     };
   };
+
+  environment.systemPackages = [
+    (pkgs.writeScriptBin "tinyauth-setup" ''
+      #!/bin/sh
+      # Usage: sudo tinyauth-setup
+      # Follow the 3 interactive prompts: Username, Password, then 'y' for Docker format.
+      set -eu
+
+      if [ "$(id -u)" -ne 0 ]; then
+        echo "Run as root: sudo tinyauth-setup" >&2
+        exit 1
+      fi
+
+      ENV_FILE="/etc/tinyauth.env"
+
+      USER_LINE=$(${pkgs.docker}/bin/docker run --rm -it ghcr.io/steveiliop56/tinyauth:v3 user create --interactive | grep -E '^USERS=' | tr -d '\r')
+
+      if [ -z "$USER_LINE" ]; then
+        echo "Failed to generate user credentials." >&2
+        exit 1
+      fi
+
+      # Replace $$ with $ for systemd EnvironmentFile
+      USER_LINE_CLEAN=$(printf '%s' "$USER_LINE" | sed 's/\$\$/$/g')
+      SECRET_KEY=$(${pkgs.openssl}/bin/openssl rand -hex 16)
+
+      install -m 0600 -o root -g root /dev/null "$ENV_FILE"
+      printf 'SECRET=%s\n%s\n' "$SECRET_KEY" "$USER_LINE_CLEAN" > "$ENV_FILE"
+
+      systemctl restart docker-tinyauth.service
+      echo "Updated $ENV_FILE and restarted docker-tinyauth.service."
+    '')
+  ];
 
   systemd.tmpfiles.rules = [
     "d /srv/storage 0775 root users -"
