@@ -44,6 +44,13 @@ in
           '';
         };
 
+        "http://torrent.nas" = {
+          extraConfig = ''
+            import tinyauth
+            reverse_proxy localhost:${toString ports.transmission}
+          '';
+        };
+
         "http://photos.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.immich}";
         };

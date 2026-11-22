@@ -63,6 +63,13 @@ in
               };
             }
             {
+              Transmission = {
+                icon = "transmission.png";
+                href = "http://torrent.nas";
+                description = "Torrent client";
+              };
+            }
+            {
               Trilium = {
                 icon = "trilium.png";
                 href = "http://trilium.nas";
@@ -99,6 +106,22 @@ in
       openFirewall = false;
       mediaLocation = "/srv/storage/immich";
       accelerationDevices = null;
+    };
+
+    transmission = {
+      enable = true;
+      openFirewall = false;
+      package = pkgs.transmission_4;
+      webHome = pkgs.flood-for-transmission;
+      settings = {
+        rpc-port = ports.transmission;
+        rpc-bind-address = "127.0.0.1";
+        rpc-whitelist-enabled = false;
+        rpc-host-whitelist-enabled = false;
+        download-dir = "/srv/storage/downloads";
+        incomplete-dir = "/srv/storage/downloads/.incomplete";
+        incomplete-dir-enabled = true;
+      };
     };
 
     trilium-server = {
@@ -175,6 +198,7 @@ in
     "d /srv/stacks 0755 root root -" # Docker Compose stacks
     "f /etc/tinyauth.env 0600 root root -" # Tinyauth secret and credentials
     "d /srv/storage/immich 0750 immich immich -" # Immich media library
+    "d /srv/storage/downloads 0775 transmission users -" # Transmission download folder
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
