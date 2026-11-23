@@ -66,6 +66,10 @@ in
         "http://trilium.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.trilium}";
         };
+
+        "http://status.nas" = {
+          extraConfig = "reverse_proxy localhost:${toString ports.uptimeKuma}";
+        };
       };
     };
 

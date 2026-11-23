@@ -122,6 +122,13 @@ in
                 description = "Self-hosted Git repositories";
               };
             }
+            {
+              "Uptime Kuma" = {
+                icon = "uptime-kuma.png";
+                href = "http://status.nas";
+                description = "Service monitoring & alerts";
+              };
+            }
           ];
         }
       ];
@@ -156,6 +163,14 @@ in
       enable = lib.mkDefault true;
       host = "0.0.0.0";
       port = ports.trilium;
+    };
+
+    uptime-kuma = {
+      enable = true;
+      settings = {
+        HOST = "127.0.0.1";
+        PORT = toString ports.uptimeKuma;
+      };
     };
   };
 

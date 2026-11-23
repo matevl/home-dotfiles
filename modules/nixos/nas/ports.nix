@@ -12,4 +12,5 @@
   tinyauth = 3000;
   transmission = 9091;
   trilium = 8080;
+  uptimeKuma = 3002;
 }
