@@ -26,6 +26,9 @@ in
     ];
 
     boot = {
+      kernelParams = [
+        "zfs.zfs_arc_max=${toString (4 * 1024 * 1024 * 1024)}"
+      ];
       supportedFilesystems = [ "zfs" ];
       zfs = {
         extraPools = cfg.pools;
