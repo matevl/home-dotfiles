@@ -63,10 +63,10 @@ in
         {
           "Media & Files" = [
             {
-              Jellyfin = {
-                icon = "jellyfin.png";
-                href = "http://jellyfin.nas";
-                description = "Movies & TV Shows";
+              "Aldine (LaTeX)" = {
+                icon = "overleaf.png";
+                href = "http://latex.nas";
+                description = "Collaborative LaTeX editor";
               };
             }
             {
@@ -81,6 +81,13 @@ in
                 icon = "immich.png";
                 href = "http://photos.nas";
                 description = "Photos & videos backup";
+              };
+            }
+            {
+              Jellyfin = {
+                icon = "jellyfin.png";
+                href = "http://jellyfin.nas";
+                description = "Movies & TV Shows";
               };
             }
             {
@@ -243,6 +250,9 @@ in
     "d /srv/storage/immich 0750 immich immich -" # Immich media library
     "d /srv/storage/downloads 0775 transmission users -" # Transmission download folder
     "d /srv/storage/forgejo 0750 forgejo forgejo -" # Forgejo Git repositories and data
+    "d /srv/storage/aldine 0755 root root -" # Aldine LaTeX root directory
+    "d /srv/storage/aldine/data 0755 root root -" # Aldine projects and uploaded files
+    "d /srv/storage/aldine/postgres 0700 999 999 -" # Aldine PostgreSQL database
   ];
 
   nixpkgs.config.permittedInsecurePackages = [

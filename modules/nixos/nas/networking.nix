@@ -55,6 +55,10 @@ in
           extraConfig = "reverse_proxy localhost:${toString ports.forgejo}";
         };
 
+        "http://latex.nas" = {
+          extraConfig = "reverse_proxy localhost:${toString ports.aldine}";
+        };
+
         "http://photos.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.immich}";
         };

@@ -1,4 +1,5 @@
 {
+  aldine = 3003;
   caddyHttp = 80; # Caddy HTTP reverse proxy
   caddyHttps = 443; # Caddy HTTPS reverse proxy
   cockpit = 9090;
