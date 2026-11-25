@@ -214,8 +214,6 @@ in
     pkgs.cockpit
     (pkgs.writeScriptBin "tinyauth-setup" ''
       #!/bin/sh
-      # Usage: sudo tinyauth-setup
-      # Follow the 3 interactive prompts: Username, Password, then 'y' for Docker format.
       set -eu
 
       if [ "$(id -u)" -ne 0 ]; then
@@ -224,15 +222,17 @@ in
       fi
 
       ENV_FILE="/etc/tinyauth.env"
+      TMP_OUT=$(mktemp)
+      trap 'rm -f "$TMP_OUT"' EXIT
 
-      USER_LINE=$(${pkgs.docker}/bin/docker run --rm -it ghcr.io/steveiliop56/tinyauth:v3 user create --interactive | grep -E '^USERS=' | tr -d '\r')
+      ${pkgs.docker}/bin/docker run --rm -it ghcr.io/steveiliop56/tinyauth:v3 user create --interactive | tee "$TMP_OUT" >/dev/tty
 
+      USER_LINE=$(grep -E '^USERS=' "$TMP_OUT" | tr -d '\r')
       if [ -z "$USER_LINE" ]; then
         echo "Failed to generate user credentials." >&2
         exit 1
       fi
 
-      # Replace $$ with $ for systemd EnvironmentFile
       USER_LINE_CLEAN=$(printf '%s' "$USER_LINE" | sed 's/\$\$/$/g')
       SECRET_KEY=$(${pkgs.openssl}/bin/openssl rand -hex 16)
 
