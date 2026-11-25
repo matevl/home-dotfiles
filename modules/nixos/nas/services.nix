@@ -210,6 +210,7 @@ in
 
   environment.systemPackages = [
     #pkgs.cockpit-zfs
+    pkgs.cockpit
     (pkgs.writeScriptBin "tinyauth-setup" ''
       #!/bin/sh
       # Usage: sudo tinyauth-setup

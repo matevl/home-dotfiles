@@ -13,9 +13,6 @@
   myNixosSettings = {
     hostName = "nas";
     username = "nas";
-    nvidia = {
-      enable = true;
-    };
     stateVersion = "26.05";
   };
 
