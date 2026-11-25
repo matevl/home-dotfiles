@@ -15,6 +15,7 @@ in
       settings = {
         WebService = {
           AllowUnencrypted = true;
+          Origins = lib.mkForce "http://nas:${toString ports.cockpit} https://nas:${toString ports.cockpit} ws://nas:${toString ports.cockpit} wss://nas:${toString ports.cockpit}";
         };
       };
     };
