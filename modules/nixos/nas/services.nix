@@ -251,6 +251,7 @@ in
     "f /etc/tinyauth.env 0600 root root -" # Tinyauth secret and credentials
     "d /srv/storage/immich 0750 immich immich -" # Immich media library
     "d /srv/storage/downloads 0775 transmission users -" # Transmission download folder
+    "d /srv/storage/downloads/.incomplete 0775 transmission users -" # Transmission incomplete folder
     "d /srv/storage/forgejo 0750 forgejo forgejo -" # Forgejo Git repositories and data
     "d /srv/storage/aldine 0755 root root -" # Aldine LaTeX root directory
     "d /srv/storage/aldine/data 0755 root root -" # Aldine projects and uploaded files
