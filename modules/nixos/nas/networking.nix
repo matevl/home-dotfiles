@@ -3,10 +3,13 @@ let
   ports = import ./ports.nix;
 in
 {
-  networking.firewall.allowedTCPPorts = [
-    ports.caddyHttp
-    ports.caddyHttps
-  ];
+  networking = {
+    resolvconf.useLocalResolver = false;
+    firewall.allowedTCPPorts = [
+      ports.caddyHttp
+      ports.caddyHttps
+    ];
+  };
 
   services = {
     # Reverse Proxy
