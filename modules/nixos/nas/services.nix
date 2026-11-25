@@ -21,10 +21,10 @@ in
     };
 
     filebrowser = {
-      enable = lib.mkDefault true;
+      enable = true;
       openFirewall = false;
       settings = {
-        address = "0.0.0.0";
+        address = "127.0.0.1";
         port = ports.filebrowser;
         root = "/srv/storage";
       };
@@ -168,8 +168,8 @@ in
     };
 
     trilium-server = {
-      enable = lib.mkDefault true;
-      host = "0.0.0.0";
+      enable = true;
+      host = "127.0.0.1";
       port = ports.trilium;
     };
 
