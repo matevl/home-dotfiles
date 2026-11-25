@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 let
   ports = import ./ports.nix;
 in
@@ -85,23 +85,10 @@ in
       enable = true;
       settings = {
         interface = "tailscale0";
-        bind-interfaces = true;
+        bind-dynamic = true;
         no-resolv = true;
-        conf-dir = "/run/dnsmasq-tailscale";
+        address = "/.nas/100.122.18.36";
       };
     };
-  };
-
-  systemd.services.dnsmasq = {
-    after = [ "tailscaled.service" ];
-    wants = [ "tailscaled.service" ];
-    preStart = ''
-      mkdir -p /run/dnsmasq-tailscale
-      : > /run/dnsmasq-tailscale/nas.conf
-      TAILSCALE_IP=$(${pkgs.tailscale}/bin/tailscale ip -4 || true)
-      if [ -n "$TAILSCALE_IP" ]; then
-        echo "address=/.nas/$TAILSCALE_IP" > /run/dnsmasq-tailscale/nas.conf
-      fi
-    '';
   };
 }
