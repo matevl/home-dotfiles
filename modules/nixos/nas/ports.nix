@@ -12,6 +12,7 @@
   immich = 2283;
   jellyfin = 8096;
   tinyauth = 3000;
+  tinyauthHttps = 8443;
   transmission = 9091;
   trilium = 8080;
   uptimeKuma = 3002;

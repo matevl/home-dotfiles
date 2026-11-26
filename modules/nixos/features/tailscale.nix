@@ -15,6 +15,10 @@ in
       default = "client";
       description = "Tailscale routing features mode";
     };
+    tailnetDomain = lib.mkOption {
+      type = lib.types.str;
+      description = "Tailnet DNS domain";
+    };
   };
 
   config = lib.mkIf cfg.enable {

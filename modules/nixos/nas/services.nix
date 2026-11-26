@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -16,7 +17,7 @@ in
         WebService = {
           AllowUnencrypted = true;
           ProtocolHeader = "X-Forwarded-Proto";
-          Origins = lib.mkForce "http://cockpit.home.nas https://cockpit.home.nas ws://cockpit.home.nas wss://cockpit.home.nas https://192.168.1.72:${toString ports.cockpit} wss://192.168.1.72:${toString ports.cockpit} https://100.122.18.36:${toString ports.cockpit} wss://100.122.18.36:${toString ports.cockpit}";
+          Origins = lib.mkForce "http://cockpit.home.nas https://cockpit.home.nas ws://cockpit.home.nas wss://cockpit.home.nas http://192.168.1.72:${toString ports.cockpit} https://192.168.1.72:${toString ports.cockpit} ws://192.168.1.72:${toString ports.cockpit} wss://192.168.1.72:${toString ports.cockpit} http://100.122.18.36:${toString ports.cockpit} https://100.122.18.36:${toString ports.cockpit} ws://100.122.18.36:${toString ports.cockpit} wss://100.122.18.36:${toString ports.cockpit} https://${config.networking.hostName}.${config.myNixosSettings.tailscale.tailnetDomain}";
         };
       };
     };
@@ -57,7 +58,7 @@ in
       enable = true;
       openFirewall = false;
       listenPort = ports.homepage;
-      allowedHosts = "hub.home.nas";
+      allowedHosts = "hub.home.nas,${config.networking.hostName}.${config.myNixosSettings.tailscale.tailnetDomain}";
       settings = {
         title = "NAS Hub";
         theme = "dark";
@@ -179,10 +180,11 @@ in
       enable = true;
       environmentFile = "/etc/tinyauth.env";
       settings = {
-        APPURL = "http://auth.home.nas";
-        COOKIE_SECURE = "false";
+        APPURL = "https://${config.networking.hostName}.${config.myNixosSettings.tailscale.tailnetDomain}";
+        COOKIE_SECURE = "true";
         SERVER_ADDRESS = "127.0.0.1";
         SERVER_PORT = ports.tinyauth;
+        REDIRECT_URI_WHITELIST = "http://hub.home.nas,http://files.home.nas,http://dockge.home.nas,http://torrent.home.nas";
       };
     };
 

@@ -22,6 +22,7 @@
     hostName = "nas";
     username = "nas";
     stateVersion = "26.05";
+    tailscale.tailnetDomain = "tail1b1266.ts.net";
   };
 
   home-manager.sharedModules = [
