@@ -5,10 +5,16 @@ in
 {
   networking = {
     resolvconf.useLocalResolver = false;
-    firewall.allowedTCPPorts = [
-      ports.caddyHttp
-      ports.caddyHttps
-    ];
+    firewall = {
+      allowedTCPPorts = [
+        ports.caddyHttp
+        ports.caddyHttps
+      ];
+      interfaces."tailscale0" = {
+        allowedUDPPorts = [ ports.dns ];
+        allowedTCPPorts = [ ports.dns ];
+      };
+    };
   };
 
   services = {
