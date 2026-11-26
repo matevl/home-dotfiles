@@ -29,63 +29,67 @@ in
         }
       '';
       virtualHosts = {
-        "http://auth.nas" = {
+        "http://auth.home.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.tinyauth}";
         };
 
         "http://nas" = {
-          extraConfig = "redir http://hub.nas{uri} permanent";
+          extraConfig = "redir http://hub.home.nas{uri} permanent";
         };
 
-        "http://files.nas" = {
+        "http://files.home.nas" = {
           extraConfig = ''
             import tinyauth
             reverse_proxy localhost:${toString ports.filebrowser}
           '';
         };
 
-        "http://dockge.nas" = {
+        "http://dockge.home.nas" = {
           extraConfig = ''
             import tinyauth
             reverse_proxy localhost:${toString ports.dockge}
           '';
         };
 
-        "http://hub.nas" = {
+        "http://hub.home.nas" = {
           extraConfig = ''
             import tinyauth
             reverse_proxy localhost:${toString ports.homepage}
           '';
         };
 
-        "http://torrent.nas" = {
+        "http://torrent.home.nas" = {
           extraConfig = ''
             import tinyauth
             reverse_proxy localhost:${toString ports.transmission}
           '';
         };
 
-        "http://git.nas" = {
+        "http://cockpit.home.nas" = {
+          extraConfig = "reverse_proxy localhost:${toString ports.cockpit}";
+        };
+
+        "http://git.home.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.forgejo}";
         };
 
-        "http://latex.nas" = {
+        "http://latex.home.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.aldine}";
         };
 
-        "http://photos.nas" = {
+        "http://photos.home.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.immich}";
         };
 
-        "http://jellyfin.nas" = {
+        "http://jellyfin.home.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.jellyfin}";
         };
 
-        "http://trilium.nas" = {
+        "http://trilium.home.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.trilium}";
         };
 
-        "http://status.nas" = {
+        "http://status.home.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.uptimeKuma}";
         };
       };
@@ -98,7 +102,7 @@ in
         interface = "tailscale0";
         bind-dynamic = true;
         no-resolv = true;
-        address = "/.nas/100.122.18.36";
+        address = "/.home.nas/100.122.18.36";
       };
     };
   };

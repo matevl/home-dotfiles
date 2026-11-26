@@ -1,6 +1,6 @@
 {
-  pkgs,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -15,7 +15,8 @@ in
       settings = {
         WebService = {
           AllowUnencrypted = true;
-          Origins = lib.mkForce "http://nas:${toString ports.cockpit} https://nas:${toString ports.cockpit} ws://nas:${toString ports.cockpit} wss://nas:${toString ports.cockpit}";
+          ProtocolHeader = "X-Forwarded-Proto";
+          Origins = lib.mkForce "http://cockpit.home.nas https://cockpit.home.nas ws://cockpit.home.nas wss://cockpit.home.nas https://192.168.1.72:${toString ports.cockpit} wss://192.168.1.72:${toString ports.cockpit} https://100.122.18.36:${toString ports.cockpit} wss://100.122.18.36:${toString ports.cockpit}";
         };
       };
     };
@@ -37,8 +38,8 @@ in
       lfs.enable = true;
       settings = {
         server = {
-          DOMAIN = "git.nas";
-          ROOT_URL = "http://git.nas/";
+          DOMAIN = "git.home.nas";
+          ROOT_URL = "http://git.home.nas/";
           HTTP_ADDR = "127.0.0.1";
           HTTP_PORT = ports.forgejo;
           START_SSH_SERVER = true;
@@ -56,6 +57,7 @@ in
       enable = true;
       openFirewall = false;
       listenPort = ports.homepage;
+      allowedHosts = "hub.home.nas";
       settings = {
         title = "NAS Hub";
         theme = "dark";
@@ -66,42 +68,42 @@ in
             {
               "Aldine (LaTeX)" = {
                 icon = "overleaf.png";
-                href = "http://latex.nas";
+                href = "http://latex.home.nas";
                 description = "Collaborative LaTeX editor";
               };
             }
             {
               FileBrowser = {
                 icon = "filebrowser.png";
-                href = "http://files.nas";
+                href = "http://files.home.nas";
                 description = "Shared files & uploads";
               };
             }
             {
               Immich = {
                 icon = "immich.png";
-                href = "http://photos.nas";
+                href = "http://photos.home.nas";
                 description = "Photos & videos backup";
               };
             }
             {
               Jellyfin = {
                 icon = "jellyfin.png";
-                href = "http://jellyfin.nas";
+                href = "http://jellyfin.home.nas";
                 description = "Movies & TV Shows";
               };
             }
             {
               Transmission = {
                 icon = "transmission.png";
-                href = "http://torrent.nas";
+                href = "http://torrent.home.nas";
                 description = "Torrent client";
               };
             }
             {
               Trilium = {
                 icon = "trilium.png";
-                href = "http://trilium.nas";
+                href = "http://trilium.home.nas";
                 description = "Knowledge base & notes";
               };
             }
@@ -112,28 +114,28 @@ in
             {
               Cockpit = {
                 icon = "cockpit.png";
-                href = "https://nas:${toString ports.cockpit}";
+                href = "http://cockpit.home.nas";
                 description = "System & ZFS administration";
               };
             }
             {
               Dockge = {
                 icon = "dockge.png";
-                href = "http://dockge.nas";
+                href = "http://dockge.home.nas";
                 description = "Docker Compose stacks manager";
               };
             }
             {
               Forgejo = {
                 icon = "forgejo.png";
-                href = "http://git.nas";
+                href = "http://git.home.nas";
                 description = "Self-hosted Git repositories";
               };
             }
             {
               "Uptime Kuma" = {
                 icon = "uptime-kuma.png";
-                href = "http://status.nas";
+                href = "http://status.home.nas";
                 description = "Service monitoring & alerts";
               };
             }
@@ -177,7 +179,8 @@ in
       enable = true;
       environmentFile = "/etc/tinyauth.env";
       settings = {
-        APPURL = "http://auth.nas";
+        APPURL = "http://auth.home.nas";
+        COOKIE_SECURE = "false";
         SERVER_ADDRESS = "127.0.0.1";
         SERVER_PORT = ports.tinyauth;
       };
