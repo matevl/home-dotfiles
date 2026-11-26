@@ -8,6 +8,14 @@
     ./hardware-configuration.nix
   ];
 
+  boot = {
+    extraModulePackages = [ config.boot.kernelPackages.r8168 ];
+    blacklistedKernelModules = [ "r8169" ];
+    kernelParams = [
+      "pcie_aspm=off"
+    ];
+  };
+
   networking.hostName = config.myNixosSettings.hostName;
 
   myNixosSettings = {
