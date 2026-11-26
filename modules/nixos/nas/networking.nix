@@ -32,11 +32,9 @@ in
         "http://auth.nas" = {
           extraConfig = "reverse_proxy localhost:${toString ports.tinyauth}";
         };
+
         "http://nas" = {
-          extraConfig = ''
-            import tinyauth
-            reverse_proxy localhost:${toString ports.homepage}
-          '';
+          extraConfig = "redir http://hub.nas{uri} permanent";
         };
 
         "http://files.nas" = {
@@ -50,6 +48,13 @@ in
           extraConfig = ''
             import tinyauth
             reverse_proxy localhost:${toString ports.dockge}
+          '';
+        };
+
+        "http://hub.nas" = {
+          extraConfig = ''
+            import tinyauth
+            reverse_proxy localhost:${toString ports.homepage}
           '';
         };
 

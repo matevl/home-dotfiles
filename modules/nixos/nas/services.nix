@@ -151,6 +151,12 @@ in
       accelerationDevices = null;
     };
 
+    logind.settings.Login = {
+      IdleAction = "ignore";
+      HandleSuspendKey = "ignore";
+      HandleHibernateKey = "ignore";
+    };
+
     transmission = {
       enable = true;
       openFirewall = false;
@@ -164,6 +170,16 @@ in
         download-dir = "/srv/storage/downloads";
         incomplete-dir = "/srv/storage/downloads/.incomplete";
         incomplete-dir-enabled = true;
+      };
+    };
+
+    tinyauth = {
+      enable = true;
+      environmentFile = "/etc/tinyauth.env";
+      settings = {
+        APPURL = "http://auth.nas";
+        SERVER_ADDRESS = "127.0.0.1";
+        SERVER_PORT = ports.tinyauth;
       };
     };
 
@@ -197,67 +213,78 @@ in
           DOCKGE_STACKS_DIR = "/srv/stacks";
         };
       };
-      tinyauth = {
-        image = "ghcr.io/steveiliop56/tinyauth:v3";
-        ports = [ "127.0.0.1:${toString ports.tinyauth}:3000" ];
-        environment = {
-          APP_URL = "http://auth.nas";
-          COOKIE_SECURE = "false";
-        };
-        environmentFiles = [ "/etc/tinyauth.env" ];
-      };
     };
   };
 
   environment.systemPackages = [
     #pkgs.cockpit-zfs
     pkgs.cockpit
-    (pkgs.writeScriptBin "tinyauth-setup" ''
-      #!/bin/sh
-      set -eu
+    pkgs.tinyauth
+    (pkgs.writeShellScriptBin "tinyauth-setup" ''
+      set -euo pipefail
 
       if [ "$(id -u)" -ne 0 ]; then
         echo "Run as root: sudo tinyauth-setup" >&2
         exit 1
       fi
 
-      ENV_FILE="/etc/tinyauth.env"
-      TMP_OUT=$(mktemp)
-      trap 'rm -f "$TMP_OUT"' EXIT
+      trap 'stty echo 2>/dev/null || true' EXIT INT TERM
 
-      ${pkgs.docker}/bin/docker run --rm -it ghcr.io/steveiliop56/tinyauth:v3 user create --interactive | tee "$TMP_OUT" >/dev/tty
+      printf "Username: "
+      read -r USERNAME
+      USERNAME=$(printf '%s' "$USERNAME" | ${pkgs.coreutils}/bin/tr -d '\r\n')
 
-      USER_LINE=$(grep -E '^USERS=' "$TMP_OUT" | tr -d '\r')
-      if [ -z "$USER_LINE" ]; then
-        echo "Failed to generate user credentials." >&2
+      if [ -z "$USERNAME" ]; then
+        echo "Username cannot be empty." >&2
         exit 1
       fi
 
-      USER_LINE_CLEAN=$(printf '%s' "$USER_LINE" | sed 's/\$\$/$/g')
-      SECRET_KEY=$(${pkgs.openssl}/bin/openssl rand -hex 16)
+      printf "Password: "
+      stty -echo
+      read -r PASSWORD
+      stty echo
+      printf "\n"
+      PASSWORD=$(printf '%s' "$PASSWORD" | ${pkgs.coreutils}/bin/tr -d '\r\n')
 
-      install -m 0600 -o root -g root /dev/null "$ENV_FILE"
-      printf 'SECRET=%s\n%s\n' "$SECRET_KEY" "$USER_LINE_CLEAN" > "$ENV_FILE"
+      if [ -z "$PASSWORD" ]; then
+        echo "Password cannot be empty." >&2
+        exit 1
+      fi
 
-      systemctl restart docker-tinyauth.service
-      echo "Updated $ENV_FILE and restarted docker-tinyauth.service."
+      HASH_PAIR=$(printf '%s' "$PASSWORD" | ${pkgs.apacheHttpd}/bin/htpasswd -niB "$USERNAME" | ${pkgs.coreutils}/bin/tr -d '\r\n')
+      ENV_FILE="/etc/tinyauth.env"
+
+      ${pkgs.coreutils}/bin/install -m 0600 -o root -g root /dev/null "$ENV_FILE"
+      printf 'TINYAUTH_AUTH_USERS=%s\n' "$HASH_PAIR" > "$ENV_FILE"
+
+      ${pkgs.systemd}/bin/systemctl reset-failed tinyauth.service >/dev/null 2>&1 || true
+      ${pkgs.systemd}/bin/systemctl restart tinyauth.service
+      echo "Updated $ENV_FILE and restarted tinyauth.service."
     '')
   ];
 
-  systemd.tmpfiles.rules = [
-    "d /srv/storage 0775 root users -" # Shared ZFS pool mountpoint
-    "d /srv/dockge/data 0755 root root -" # Dockge persistent data
-    "d /srv/stacks 0755 root root -" # Docker Compose stacks
-    "f /etc/tinyauth.env 0600 root root -" # Tinyauth secret and credentials
-    "d /srv/storage/immich 0750 immich immich -" # Immich media library
-    "d /srv/storage/downloads 0775 transmission users -" # Transmission download folder
-    "d /srv/storage/downloads/.incomplete 0775 transmission users -" # Transmission incomplete folder
-    "d /srv/storage/forgejo 0750 forgejo forgejo -" # Forgejo Git repositories and data
-    "d /srv/storage/aldine 0755 root root -" # Aldine LaTeX root directory
-    "d /srv/storage/aldine/data 0755 root root -" # Aldine projects and uploaded files
-    "d /srv/storage/aldine/postgres 0700 999 999 -" # Aldine PostgreSQL database
-  ];
+  systemd = {
+    targets = {
+      sleep.enable = false;
+      suspend.enable = false;
+      hibernate.enable = false;
+      hybrid-sleep.enable = false;
+    };
 
+    tmpfiles.rules = [
+      "d /srv/storage 0775 root users -" # Shared ZFS pool mountpoint
+      "d /srv/dockge/data 0755 root root -" # Dockge persistent data
+      "d /srv/stacks 0755 root root -" # Docker Compose stacks
+      "f /etc/tinyauth.env 0600 root root -" # Tinyauth secret and credentials
+      "d /srv/storage/immich 0750 immich immich -" # Immich media library
+      "d /srv/storage/downloads 0775 transmission users -" # Transmission download folder
+      "d /srv/storage/downloads/.incomplete 0775 transmission users -" # Transmission incomplete folder
+      "d /srv/storage/forgejo 0750 forgejo forgejo -" # Forgejo Git repositories and data
+      "d /srv/storage/aldine 0755 root root -" # Aldine LaTeX root directory
+      "d /srv/storage/aldine/data 0755 root root -" # Aldine projects and uploaded files
+      "d /srv/storage/aldine/postgres 0700 999 999 -" # Aldine PostgreSQL database
+    ];
+  };
   nixpkgs.config.permittedInsecurePackages = [
     "immich-2.7.5"
   ];
