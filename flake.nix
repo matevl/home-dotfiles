@@ -78,6 +78,10 @@
       nixosConfigurations = {
         laptop = mkHost { hostname = "laptop"; };
         desktop = mkHost { hostname = "desktop"; };
+        nas = mkHost {
+          hostname = "nas";
+          profile = ./modules/home-manager/core;
+        };
       };
     };
 }

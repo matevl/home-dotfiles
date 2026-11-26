@@ -21,6 +21,6 @@ repos:
 
       - id: niri-validate
         name: Validate Niri configuration
-        entry: niri validate --config modules/home-manager/workstation/niri/config.kdl
+        entry: sh -c '! command -v niri >/dev/null || niri validate --config modules/home-manager/workstation/niri/config.kdl'
         language: system
         pass_filenames: false

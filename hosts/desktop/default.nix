@@ -15,11 +15,13 @@
       enable = true;
       remote.enable = true;
     };
+    hostName = "desktop";
     ldmtool.enable = true;
     nvidia = {
       enable = true;
       modern.enable = true;
     };
+    tailscale.enable = true;
     stateVersion = "26.05";
   };
 

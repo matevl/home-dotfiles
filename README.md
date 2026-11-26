@@ -2,24 +2,20 @@
 
 This repository contains my personal **NixOS** configuration, managed with **Flakes** and **Home Manager**.
 
-## Desktop Environments
+## Hosts & Profiles
 
-This config uses **Niri** as the main compositor, with **Quickshell** and **Dux-Shell** as the desktop layer. **GNOME** is kept as a backup desktop, and GDM handles login.
-
-## Included Tools
-
-The user environment includes **VS Code**, **Helix**, **zsh**, **Kitty**, **Brave**, and a set of developer tools for **Nix**, **Rust**, **Python**, **C/C++**, and **Godot**.
+- **Workstations (`laptop`, `desktop`)**: Desktop environment built around **Niri** (with **Quickshell**, **Dux-Shell**, and **GNOME** as a fallback) alongside a full development setup.
+- **NAS (`nas`)**: Headless storage and self-hosted server built on **ZFS**, **Tailscale**, and **Docker**, exposed behind **Caddy** and **Tinyauth**.
 
 ## Layout
 
-- `hosts/`: host-specific NixOS configuration.
-- `modules/nixos/`: system-level configuration.
-- `modules/home-manager/`: user environment and application settings.
+- `hosts/`: host-specific NixOS configurations (`laptop`, `desktop`, `nas`, and `_template/`).
+- `modules/nixos/`: system-level modules split into `core/`, `features/`, `workstation/`, and `nas/`.
+- `modules/home-manager/`: user environment split into `core/` and `workstation/`.
 
 ## Usage
 
-Apply the configuration on the laptop with:
+Apply a configuration to a host (e.g., `laptop`, `desktop`, or `nas`):
 
 ```bash
-sudo nixos-rebuild switch --flake .#laptop --impures
-```
+sudo nixos-rebuild switch --flake .#<hostname>
