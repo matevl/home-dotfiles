@@ -5,6 +5,7 @@
 }:
 let
   ports = import ./ports.nix;
+  inherit (import ./sites.nix) domain sites url;
 in
 {
   services = {
@@ -16,7 +17,22 @@ in
         WebService = {
           AllowUnencrypted = true;
           ProtocolHeader = "X-Forwarded-Proto";
-          Origins = lib.mkForce "http://cockpit.home.nas https://cockpit.home.nas ws://cockpit.home.nas wss://cockpit.home.nas https://192.168.1.72:${toString ports.cockpit} wss://192.168.1.72:${toString ports.cockpit} https://100.122.18.36:${toString ports.cockpit} wss://100.122.18.36:${toString ports.cockpit}";
+          Origins = lib.mkForce (
+            lib.concatStringsSep " " [
+              # Caddy / Tailscale
+              (url "cockpit")
+              "wss://${domain}:${toString sites.cockpit.listen}"
+              # Direct IP
+              "http://192.168.1.72:${toString ports.cockpit}"
+              "https://192.168.1.72:${toString ports.cockpit}"
+              "ws://192.168.1.72:${toString ports.cockpit}"
+              "wss://192.168.1.72:${toString ports.cockpit}"
+              "http://100.122.18.36:${toString ports.cockpit}"
+              "https://100.122.18.36:${toString ports.cockpit}"
+              "ws://100.122.18.36:${toString ports.cockpit}"
+              "wss://100.122.18.36:${toString ports.cockpit}"
+            ]
+          );
         };
       };
     };
@@ -28,6 +44,7 @@ in
         address = "127.0.0.1";
         port = ports.filebrowser;
         root = "/srv/storage";
+        auth.method = "noauth";
       };
     };
 
@@ -38,8 +55,9 @@ in
       lfs.enable = true;
       settings = {
         server = {
-          DOMAIN = "git.home.nas";
-          ROOT_URL = "http://git.home.nas/";
+          DOMAIN = domain;
+          SSH_DOMAIN = domain;
+          ROOT_URL = "${url "git"}/";
           HTTP_ADDR = "127.0.0.1";
           HTTP_PORT = ports.forgejo;
           START_SSH_SERVER = true;
@@ -57,7 +75,7 @@ in
       enable = true;
       openFirewall = false;
       listenPort = ports.homepage;
-      allowedHosts = "hub.home.nas";
+      allowedHosts = domain;
       settings = {
         title = "NAS Hub";
         theme = "dark";
@@ -68,42 +86,42 @@ in
             {
               "Aldine (LaTeX)" = {
                 icon = "overleaf.png";
-                href = "http://latex.home.nas";
+                href = url "latex";
                 description = "Collaborative LaTeX editor";
               };
             }
             {
               FileBrowser = {
                 icon = "filebrowser.png";
-                href = "http://files.home.nas";
+                href = url "files";
                 description = "Shared files & uploads";
               };
             }
             {
               Immich = {
                 icon = "immich.png";
-                href = "http://photos.home.nas";
+                href = url "photos";
                 description = "Photos & videos backup";
               };
             }
             {
               Jellyfin = {
                 icon = "jellyfin.png";
-                href = "http://jellyfin.home.nas";
+                href = url "jellyfin";
                 description = "Movies & TV Shows";
               };
             }
             {
               Transmission = {
                 icon = "transmission.png";
-                href = "http://torrent.home.nas";
+                href = url "torrent";
                 description = "Torrent client";
               };
             }
             {
               Trilium = {
                 icon = "trilium.png";
-                href = "http://trilium.home.nas";
+                href = url "trilium";
                 description = "Knowledge base & notes";
               };
             }
@@ -114,28 +132,28 @@ in
             {
               Cockpit = {
                 icon = "cockpit.png";
-                href = "http://cockpit.home.nas";
+                href = url "cockpit";
                 description = "System & ZFS administration";
               };
             }
             {
               Dockge = {
                 icon = "dockge.png";
-                href = "http://dockge.home.nas";
+                href = url "dockge";
                 description = "Docker Compose stacks manager";
               };
             }
             {
               Forgejo = {
                 icon = "forgejo.png";
-                href = "http://git.home.nas";
+                href = url "git";
                 description = "Self-hosted Git repositories";
               };
             }
             {
               "Uptime Kuma" = {
                 icon = "uptime-kuma.png";
-                href = "http://status.home.nas";
+                href = url "status";
                 description = "Service monitoring & alerts";
               };
             }
@@ -179,8 +197,8 @@ in
       enable = true;
       environmentFile = "/etc/tinyauth.env";
       settings = {
-        APPURL = "http://auth.home.nas";
-        COOKIE_SECURE = "false";
+        APPURL = url "auth";
+        COOKIE_SECURE = "true";
         SERVER_ADDRESS = "127.0.0.1";
         SERVER_PORT = ports.tinyauth;
       };
