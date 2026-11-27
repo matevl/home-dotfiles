@@ -44,7 +44,10 @@ in
         address = "127.0.0.1";
         port = ports.filebrowser;
         root = "/srv/storage";
-        auth.method = "noauth";
+        auth.methods.proxy = {
+          enabled = true;
+          header = "Remote-User";
+        };
       };
     };
 
@@ -285,6 +288,15 @@ in
   ];
 
   systemd = {
+    services = lib.genAttrs [ "immich-server" "forgejo" "transmission" "docker" ] (_: {
+      requires = [ "zfs-import-tank.service" ];
+      after = [
+        "zfs-import-tank.service"
+        "zfs-mount.service"
+      ];
+      unitConfig.AssertPathIsMountPoint = "/srv/storage";
+    });
+
     targets = {
       sleep.enable = false;
       suspend.enable = false;
