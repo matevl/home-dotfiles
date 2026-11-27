@@ -44,7 +44,10 @@ in
         address = "127.0.0.1";
         port = ports.filebrowser;
         root = "/srv/storage";
-        auth.method = "noauth";
+        auth.methods.proxy = {
+          enabled = true;
+          header = "Remote-User";
+        };
       };
     };
 

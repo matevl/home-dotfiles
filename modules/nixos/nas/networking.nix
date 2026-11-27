@@ -20,6 +20,7 @@ in
         (tinyauth) {
           forward_auth localhost:${toString ports.tinyauth} {
             uri /api/auth/caddy
+            copy_headers Remote-User Remote-Name Remote-Email
           }
         }
       '';
